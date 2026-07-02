@@ -165,7 +165,7 @@ Please explain everything in simple language with diagrams or flowcharts whereve
 ```
 # Output :
 
-[MixedSignalFlow_Overview] (MixedSignalFlow_Overview/README.md)
+[MixedSignalFlow_Overview](MixedSignalFlow_Overview/README.md)
 
 ```
 Excellent! I was able to inspect the repository you uploaded. It contains the actual project files (README, OpenLane configs, LEF/LIB, Verilog, results, etc.), so here's a repository-specific explanation based on its contents.
