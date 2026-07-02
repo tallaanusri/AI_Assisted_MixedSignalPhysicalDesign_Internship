@@ -452,6 +452,13 @@ This alone will save hours and It also Given the basic & Clear understing of the
 
 # Conclusion at Stage 1:
 Actually Using AI in this Stage helped in saving the time as well as after reading the AI version of the repository,It became easy in understading all the things in repostary very well.Here,at this Stage AI done a great a job and It helps In learning the new Concepts easily even to beginner level Candidate.
+---
+## Stage 2 - Understanding The Tools and Softwares:
+---
+# Objective :
+To Know About the OpenLane architecture and Sky130 and docker & there role in the **RTL-to-GDS Mixed-Signal Physical Design**.
+
+
 
 
 
