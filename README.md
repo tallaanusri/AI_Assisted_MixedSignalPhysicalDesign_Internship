@@ -593,20 +593,19 @@ Tools Installation Process [InstallationGuide](InstallationGuide/README.md)
 # Objective :
 Every file was created using a focused and well-defined prompt to ensure consistency,hierarchy in the design particularly for module names, port lists, pin names, and net connections.This approach was intentionally adopted because even a minor mismatch in ports or signal names can lead to hierarchy inconsistencies, compilation errors, or integration failures during the OpenLane flow. Maintaining identical interfaces across all input files is therefore essential for successful macro integration, floorplanning, placement, routing, and verification. Ensuring this consistency significantly reduces debugging effort and improves the overall reliability of the Analog Place-and-Route process.
 
-1. Top-Level Digital Verilog (design_mux.v)
-   ```
+ 1. Top-Level Digital Verilog (design_mux.v)
+  ```
 Write a synthesizable Verilog top-level module named **`design_mux`** for the OpenLane flow. Instantiate **exactly one** analog hard macro **`AMUX2_3V`** with **exactly** these ports:
 
-* `input I0`
-* `input I1`
-* `output out`
-* `input select`
+* input I0
+* input I1
+* output out
+* input select
+Do not rename, reorder, add, or remove any macro ports, and do not include power/ground pins.
 
-Do **not** rename, reorder, add, or remove any macro ports, and do **not** include power/ground pins.
+Implement minimal digital control logic using clk and active-low rst_n to generate the select signal. Connect all ports correctly and ensure hierarchy consistency to avoid port mismatches.
 
-Implement minimal digital control logic using `clk` and active-low `rst_n` to generate the `select` signal. Connect all ports correctly and ensure hierarchy consistency to avoid port mismatches.
-
-Generate clean, synthesizable **Verilog-2001** code only. Do not use delays, `initial` blocks, or other non-synthesizable constructs. The output should contain only the complete `design_mux` module.
+Generate clean, synthesizable **Verilog-2001** code only. Do not use delays, initial blocks, or other non-synthesizable constructs. The output should contain only the complete design_mux module.
 ```
 
 
