@@ -191,7 +191,7 @@ I am a beginner in OpenLane and analog physical design, so explain everything fr
  * also describe the stages at which the respective file is used.
  * describe how each individual file is involved in this project .
 ```
-# 📂 AI Output Of Input Files Required:
+# 📂 AI Generated Required Input Files :
 
 | **File / Directory** | **Example** | **Purpose** | **Used In Stage(s)** |
 |-----------------------|-------------|-------------|----------------------|
@@ -249,7 +249,8 @@ Without `verilog_to_lib.pl`, the required Liberty file cannot be generated autom
 ## Conclusion At Stage 2 :
 
 The comparison with the reference project shows that both `macro.cfg` and `verilog_to_lib.pl` are essential support files for analog macro integration in OpenLane. While `macro.cfg` ensures the analog macro is placed at the correct physical location during floorplanning, `verilog_to_lib.pl` generates the Liberty file required for timing characterization and macro recognition. Omitting either of these files can interrupt the implementation flow and prevent successful completion of the Analog Place-and-Route process.
-That is Using the AI saves Time but it doesn't gives Everything Correctly always so,we have to make sure to verify and understand the results of AI whether correct or not Before blindly Following it.
+
+Concluding That Using the AI saves Time but it doesn't gives Everything Correctly always so,we have to make sure to verify and understand the results of AI whether correct or not. ** Never trust AI-generated interfaces without verification.**
 
 ---
 ## Stage 3 - Understanding The Tools and Softwares:
