@@ -690,6 +690,11 @@ AMUX2_3V 80 80 N
 | **config.tcl** | Configures `design_mux`, Sky130A PDK, `sky130_fd_sc_hd`, clock, DIE_AREA, EXTRA_LEFS/LIBS/GDS, and macro placement. | Reference repository configures the same OpenLane variables for analog macro integration. | 🟡 **Mostly Match** | Core configuration is correct. Minor parameter values (e.g., routing options, floorplan variables) may differ from the reference but do not change the overall flow. |
 | **macro.cfg** | `AMUX2_3V 80 80 N` (fixed placement inside a 200 × 200 µm die). | Uses the macro instance name with fixed placement coordinates and orientation. | 🟡 **Functionally Match** | Correct format and orientation. The only value that may differ is the exact placement coordinate used by the reference repository. The instance name must exactly match the one in `design_mux.v`. |
 
+---
+# Physical Design Journey:
+---
+My physical Design Journey is Cleary in the [PD](PD/README.md)
+
 
 
 
