@@ -173,8 +173,59 @@ This alone will save hours Of time and It also Given the basic & Clear understan
 
 Actually Using AI in this Stage helped in saving the time as well as after reading the AI version of the repository,It became easy in understading all the things in repostary very well.Here,at this Stage AI done a great a job and It helps In learning the new Concepts easily even to beginner level Candidate.
 ---
+## Stage 2 - Analysing about required input files:
+---
+# Objective :
 
-## Stage 2 - Understanding The Tools and Softwares:
+After Understanding on the overall **vsdmixedsignalflow** repository & Its Project Problem Statement Instead of running OpenLane,I wanted to understand what are The files exist In this project  why , where there are used in the flow, and what may happen if any of file was missing and what Problem It leads to the whole project e.t.c.
+So,Instead of directly using the files from the reference repository, I used AI to analyze the mixed-signal design Flow and It requirements.
+
+# Prompt:
+ ```
+The project describes how the PNR of an analog IP, 2:1 analog multiplexer is carried out by opensource EDA tools, Openlane. It also discusses the steps to modify the current IP layouts in order to ensure its acceptance by the EDA tools.
+I am a beginner in OpenLane and analog physical design, so explain everything from first principles with clear examples and diagrams wherever appropriate,for this project .so could you please give me the all basic input files required to do .
+ * list the all input files required in it. 
+ * what happened if any one of the file missed and how this missing file may lead problem to whole project 
+ * also describe the stages at which the respective file is used.
+ * describe how each individual file is involved in this project .
+```
+# 📂 AI Output Of Input Files Required for Analog PNR Using OpenLane:
+
+| **File / Directory** | **Example** | **Purpose** | **Used In Stage** | **What Happens if Missing?** | **Overall Project Impact** |
+|-----------------------|-------------|-------------|-------------------|------------------------------|----------------------------|
+| **Process Design Kit (PDK)** | `sky130A/` | Provides technology information, device models, DRC/LVS rules, standard cells, and layer definitions. | Entire Flow | OpenLane cannot initialize the design. | Complete project stops. |
+| **Technology LEF** | `tech.lef` | Defines routing layers, vias, manufacturing grid, and routing tracks. | Floorplanning, Placement, Routing | Routing resources are undefined. | Placement and routing fail. |
+| **Layer Map File** | `layer.map`, `sky130.lyp` | Maps physical layout layers to GDS layer numbers. | Layout, GDS Export | Incorrect layer mapping. | Wrong GDS generated and verification fails. |
+| **SPICE Netlist** | `mux.spice` | Describes transistor-level circuit connectivity. | LVS, Simulation | No reference circuit available. | LVS and simulations cannot be performed. |
+| **CDL Netlist** | `mux.cdl` | Simplified SPICE netlist used by Netgen. | LVS | Netgen has no comparison netlist. | LVS fails completely. |
+| **Schematic File** | `mux.sch` | Human-readable circuit design reference. | Design Verification | Design becomes difficult to verify manually. | Flow continues, but debugging is difficult. |
+| **Magic Layout File** | `mux.mag` | Physical layout created in Magic. | LEF Generation, GDS Generation | No physical layout available. | LEF and GDS cannot be generated. |
+| **GDSII Layout** | `mux.gds` | Final mask layout for fabrication. | DRC, LVS, Tapeout | No layout database available. | Design cannot be fabricated. |
+| **Macro LEF** | `mux.lef` | Defines macro size, pins, obstructions, and placement information. | Floorplanning, Placement, Routing | OpenLane cannot recognize the analog block. | Analog macro cannot be placed or routed. |
+| **Verilog Wrapper** | `mux.v` | Provides logical representation of the analog macro. | OpenLane Initialization | Top module cannot be found. | Flow terminates before placement. |
+| **Black-Box Verilog** | `mux_bb.v` | Defines only module ports for integration. | RTL Integration | Analog IP cannot be instantiated. | RTL compilation fails. |
+| **Liberty Timing File** | `mux.lib` | Contains timing, power, capacitance, and delay models. | Static Timing Analysis (STA) | No timing information available. | Timing analysis and optimization fail. |
+| **SDC Constraints** | `design.sdc` | Specifies clocks and timing constraints. | STA, Optimization | Default or incorrect timing assumptions are used. | Timing reports become inaccurate. |
+| **OpenLane Configuration** | `config.json`, `config.tcl` | Specifies design name, PDK, LEF, Verilog, LIB, and flow options. | Flow Initialization | OpenLane cannot determine design settings. | Entire flow cannot start. |
+| **Pin Order Configuration** | `pin_order.cfg` | Defines desired IO pin sequence. | Pin Placement | Pins are placed arbitrarily. | Routing congestion and integration issues. |
+| **Magic Technology File** | `sky130A.tech` | Defines DRC rules and layer information for Magic. | DRC | DRC cannot be executed. | Manufacturing rule violations remain undetected. |
+| **Netgen Setup File** | `sky130A_setup.tcl` | Defines device matching rules for LVS. | LVS | Netgen cannot compare layouts correctly. | LVS fails. |
+| **Extraction Rule File** | `extract.tcl` | Generates parasitic RC information. | Parasitic Extraction (PEX) | RC extraction cannot be performed. | Post-layout simulations become inaccurate. |
+| **SPEF File** *(Generated)* | `mux.spef` | Stores extracted parasitic resistance and capacitance values. | Post-Layout STA | No parasitic information available. | Timing accuracy decreases. |
+| **Standard Cell LEF** | `sky130_fd_sc_hd.lef` | Physical abstract views of standard cells. | Placement | Standard cells cannot be placed. | Digital implementation fails. |
+| **Standard Cell Liberty** | `sky130_fd_sc_hd.lib` | Timing and power models of standard cells. | STA | Standard-cell timing unavailable. | Timing closure impossible. |
+| **Standard Cell GDS** | `sky130_fd_sc_hd.gds` | Physical layouts of standard cells. | Final GDS Merge | Final layout is incomplete. | Tapeout fails. |
+| **Flow TCL Script** | `flow.tcl` | Automates OpenLane execution stages. | Entire Flow | Flow cannot execute automatically. | Manual execution or project failure. |
+| **Custom TCL Scripts** | `place.tcl`, `route.tcl`, `pdn.tcl` | Performs customized placement, routing, and PDN tasks. | Customized Stages | Project-specific commands are skipped. | Final layout may not meet design requirements. |
+
+
+
+
+
+
+
+---
+## Stage 3 - Understanding The Tools and Softwares:
 ---
 # Objective :
 
