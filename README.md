@@ -191,33 +191,22 @@ I am a beginner in OpenLane and analog physical design, so explain everything fr
 ```
 # 📂 AI Output Of Input Files Required for Analog PNR Using OpenLane:
 
-| **File / Directory** | **Example** | **Purpose** | **Used In Stage** | **What Happens if Missing?** | **Overall Project Impact** |
-|-----------------------|-------------|-------------|-------------------|------------------------------|----------------------------|
-| **Process Design Kit (PDK)** | `sky130A/` | Provides technology information, device models, DRC/LVS rules, standard cells, and layer definitions. | Entire Flow | OpenLane cannot initialize the design. | Complete project stops. |
-| **Technology LEF** | `tech.lef` | Defines routing layers, vias, manufacturing grid, and routing tracks. | Floorplanning, Placement, Routing | Routing resources are undefined. | Placement and routing fail. |
-| **Layer Map File** | `layer.map`, `sky130.lyp` | Maps physical layout layers to GDS layer numbers. | Layout, GDS Export | Incorrect layer mapping. | Wrong GDS generated and verification fails. |
-| **SPICE Netlist** | `mux.spice` | Describes transistor-level circuit connectivity. | LVS, Simulation | No reference circuit available. | LVS and simulations cannot be performed. |
-| **CDL Netlist** | `mux.cdl` | Simplified SPICE netlist used by Netgen. | LVS | Netgen has no comparison netlist. | LVS fails completely. |
-| **Schematic File** | `mux.sch` | Human-readable circuit design reference. | Design Verification | Design becomes difficult to verify manually. | Flow continues, but debugging is difficult. |
-| **Magic Layout File** | `mux.mag` | Physical layout created in Magic. | LEF Generation, GDS Generation | No physical layout available. | LEF and GDS cannot be generated. |
-| **GDSII Layout** | `mux.gds` | Final mask layout for fabrication. | DRC, LVS, Tapeout | No layout database available. | Design cannot be fabricated. |
-| **Macro LEF** | `mux.lef` | Defines macro size, pins, obstructions, and placement information. | Floorplanning, Placement, Routing | OpenLane cannot recognize the analog block. | Analog macro cannot be placed or routed. |
-| **Verilog Wrapper** | `mux.v` | Provides logical representation of the analog macro. | OpenLane Initialization | Top module cannot be found. | Flow terminates before placement. |
-| **Black-Box Verilog** | `mux_bb.v` | Defines only module ports for integration. | RTL Integration | Analog IP cannot be instantiated. | RTL compilation fails. |
-| **Liberty Timing File** | `mux.lib` | Contains timing, power, capacitance, and delay models. | Static Timing Analysis (STA) | No timing information available. | Timing analysis and optimization fail. |
-| **SDC Constraints** | `design.sdc` | Specifies clocks and timing constraints. | STA, Optimization | Default or incorrect timing assumptions are used. | Timing reports become inaccurate. |
-| **OpenLane Configuration** | `config.json`, `config.tcl` | Specifies design name, PDK, LEF, Verilog, LIB, and flow options. | Flow Initialization | OpenLane cannot determine design settings. | Entire flow cannot start. |
-| **Pin Order Configuration** | `pin_order.cfg` | Defines desired IO pin sequence. | Pin Placement | Pins are placed arbitrarily. | Routing congestion and integration issues. |
-| **Magic Technology File** | `sky130A.tech` | Defines DRC rules and layer information for Magic. | DRC | DRC cannot be executed. | Manufacturing rule violations remain undetected. |
-| **Netgen Setup File** | `sky130A_setup.tcl` | Defines device matching rules for LVS. | LVS | Netgen cannot compare layouts correctly. | LVS fails. |
-| **Extraction Rule File** | `extract.tcl` | Generates parasitic RC information. | Parasitic Extraction (PEX) | RC extraction cannot be performed. | Post-layout simulations become inaccurate. |
-| **SPEF File** *(Generated)* | `mux.spef` | Stores extracted parasitic resistance and capacitance values. | Post-Layout STA | No parasitic information available. | Timing accuracy decreases. |
-| **Standard Cell LEF** | `sky130_fd_sc_hd.lef` | Physical abstract views of standard cells. | Placement | Standard cells cannot be placed. | Digital implementation fails. |
-| **Standard Cell Liberty** | `sky130_fd_sc_hd.lib` | Timing and power models of standard cells. | STA | Standard-cell timing unavailable. | Timing closure impossible. |
-| **Standard Cell GDS** | `sky130_fd_sc_hd.gds` | Physical layouts of standard cells. | Final GDS Merge | Final layout is incomplete. | Tapeout fails. |
-| **Flow TCL Script** | `flow.tcl` | Automates OpenLane execution stages. | Entire Flow | Flow cannot execute automatically. | Manual execution or project failure. |
-| **Custom TCL Scripts** | `place.tcl`, `route.tcl`, `pdn.tcl` | Performs customized placement, routing, and PDN tasks. | Customized Stages | Project-specific commands are skipped. | Final layout may not meet design requirements. |
-
+| **File / Directory** | **Example** | **Purpose** | **Used In Stage(s)** |
+|-----------------------|-------------|-------------|----------------------|
+| **Process Design Kit (PDK)** | `sky130A/` | Provides technology information including device models, DRC/LVS rules, standard-cell libraries, layer definitions, and process parameters required by all EDA tools. | Entire Flow (Layout, LEF Generation, Floorplanning, Placement, Routing, DRC, LVS, GDS Generation) |
+| **Technology LEF** | `tech.lef` | Defines routing layers, via definitions, manufacturing grid, routing tracks, and technology-specific physical information. | Floorplanning, Placement, Routing |
+| **SPICE Netlist** | `mux.spice` | Describes the transistor-level circuit connectivity of the analog multiplexer and serves as the reference schematic for verification. | Circuit Verification, LVS, Circuit Simulation |
+| **Magic Layout File** | `mux.mag`, `21muxlayout.mag` | Stores the complete transistor-level physical layout of the analog IP designed in Magic. | Layout Editing, LEF Generation, GDS Generation |
+| **Macro LEF** | `AMUX2_3V.lef` | Provides an abstract physical representation of the analog macro including cell size, pin locations, routing blockages, and placement boundaries. | Floorplanning, Macro Placement, Routing |
+| **Liberty File** | `AMUX2_3V.lib` | Contains timing, delay, capacitance, transition, and power information used for timing analysis of the analog macro. | Static Timing Analysis (STA), Timing Optimization |
+| **Verilog Top Module** | `design_mux.v` | Defines the top-level design that instantiates the analog macro and connects it with the surrounding digital logic. | OpenLane Initialization, Design Integration |
+| **Analog Macro Verilog** | `AMUX2_3V.v` | Provides the logical or black-box representation of the analog macro for synthesis and RTL compilation. | RTL Compilation, Macro Integration |
+| **OpenLane Configuration File** | `config.tcl` | Specifies the design name, PDK, LEF, Liberty files, Verilog sources, clock settings, and flow parameters required by OpenLane. | OpenLane Flow Initialization |
+| **Flow Script** | `flow.tcl` | Controls the execution of the OpenLane flow by invoking floorplanning, placement, routing, verification, and GDS generation steps. | Entire OpenLane Flow |
+| **Magic Technology File** | `sky130A.tech` | Contains technology-specific layer definitions, design rules, and extraction parameters used by Magic. | Layout Editing, DRC, Extraction |
+| **Standard Cell LEF** | `sky130_fd_sc_hd.lef` | Provides the physical abstract views of all standard cells available in the technology library. | Standard Cell Placement, Routing |
+| **Standard Cell Liberty** | `sky130_fd_sc_hd.lib` | Contains timing, power, and electrical characteristics of the standard cells used during implementation. | Static Timing Analysis (STA), Timing Optimization |
+| **Standard Cell GDS** | `sky130_fd_sc_hd.gds` | Contains the physical layouts of all standard cells required for merging into the final chip layout during tapeout. | Final GDS Merge, Tapeout |
 
 
 
