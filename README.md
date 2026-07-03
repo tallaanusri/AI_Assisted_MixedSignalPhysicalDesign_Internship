@@ -172,9 +172,11 @@ This alone will save hours Of time and It also Given the basic & Clear understan
 # Conclusion at Stage 1:
 
 Actually Using AI in this Stage helped in saving the time as well as after reading the AI version of the repository,It became easy in understading all the things in repostary very well.Here,at this Stage AI done a great a job and It helps In learning the new Concepts easily even to beginner level Candidate.
+
 ---
 ## Stage 2 - Analysing about required input files:
 ---
+
 # Objective :
 
 After Understanding on the overall **vsdmixedsignalflow** repository & Its Project Problem Statement Instead of running OpenLane,I wanted to understand what are The files exist In this project  why , where there are used in the flow, and what may happen if any of file was missing and what Problem It leads to the whole project e.t.c.
