@@ -1,4 +1,4 @@
-Top-Level Digital Verilog Code for design_mux.v
+//Top-Level Digital Verilog Code for design_mux.v
 
 module design_mux (
     input  wire RST,
