@@ -1,4 +1,3 @@
-//AI Generated AMUX2_3V.lef
 
 MACRO AMUX2_3V
   CLASS CORE ;
