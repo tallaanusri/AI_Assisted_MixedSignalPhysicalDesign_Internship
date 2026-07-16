@@ -9,9 +9,12 @@ set ::env(DESIGN_NAME) "design_mux"
 # RTL source files
 # Only the digital wrapper is synthesized.
 # The analog macro is treated as a hard macro.
-set ::env(VERILOG_FILES) \
-    "$::env(DESIGN_DIR)/src/design_mux.v"
-
+set ::env(VERILOG_FILES) "\
+$::env(DESIGN_DIR)/src/design_mux.v \
+$::env(DESIGN_DIR)/src/raven_spi.v \
+$::env(DESIGN_DIR)/src/spi_slave.v \
+$::env(DESIGN_DIR)/src/AMUX2_3V.v"
+set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 #-------------------------------------------------------------
 # Technology Configuration
 #-------------------------------------------------------------
@@ -27,8 +30,7 @@ set ::env(STD_CELL_LIBRARY) "sky130_fd_sc_hd"
 #-------------------------------------------------------------
 
 # Clock input port
-set ::env(CLOCK_PORT) "clk"
-
+set ::env(CLOCK_PORT) "SCK"
 # Clock period (ns)
 set ::env(CLOCK_PERIOD) "10.0"
 
@@ -84,3 +86,24 @@ set ::env(FP_PDN_HPITCH) "153.18"
 
 # Maximum routing layer
 set ::env(GLB_RT_MAXLAYER) "5"
+# Disable resizer optimization for analog macro
+set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0
+# -------------------------------------------------------------
+# Analog Macro Settings
+# -------------------------------------------------------------
+
+# Prevent placement optimizations around the macro
+set ::env(PL_MACRO_HALO) "10 10"
+set ::env(PL_MACRO_CHANNEL) "10 10"
+
+# Disable diode insertion
+set ::env(DIODE_INSERTION_STRATEGY) 0
+
+# Enable macro power grid
+set ::env(FP_PDN_ENABLE_MACROS_GRID) 1
+
+# Connect macro power pins
+set ::env(FP_PDN_MACRO_HOOKS) "u_amux VDD VSS VDD VSS"

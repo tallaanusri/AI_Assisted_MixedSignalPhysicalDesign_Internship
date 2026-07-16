@@ -1,102 +1,42 @@
-
-
 library(AMUX2_3V) {
 
-  delay_model              : table_lookup;
-  time_unit                : "1ns";
-  voltage_unit             : "1V";
-  current_unit             : "1mA";
-  leakage_power_unit       : "1nW";
-  capacitive_load_unit (1, pf);
+  time_unit : "1ns";
+  voltage_unit : "1V";
+  current_unit : "1mA";
+
+  nom_voltage : 3.3;
+
+  input_threshold_pct_rise : 50;
+  input_threshold_pct_fall : 50;
+  output_threshold_pct_rise : 50;
+  output_threshold_pct_fall : 50;
+
+  slew_lower_threshold_pct_rise : 20;
+  slew_upper_threshold_pct_rise : 80;
+  slew_lower_threshold_pct_fall : 20;
+  slew_upper_threshold_pct_fall : 80;
+
 
   cell(AMUX2_3V) {
 
-    area : 300;
+    area : 100;
 
     pin(I0) {
-      direction    : input;
-      capacitance  : 0.002;
+      direction : input;
     }
 
     pin(I1) {
-      direction    : input;
-      capacitance  : 0.002;
+      direction : input;
     }
 
     pin(select) {
-      direction    : input;
-      capacitance  : 0.001;
+      direction : input;
     }
 
     pin(out) {
       direction : output;
-      function  : "(select * I1) + (!select * I0)";
-
-      timing() {
-        related_pin : "I0";
-        timing_type : combinational;
-
-        cell_rise(scalar) {
-          values("0.15");
-        }
-
-        cell_fall(scalar) {
-          values("0.15");
-        }
-
-        rise_transition(scalar) {
-          values("0.05");
-        }
-
-        fall_transition(scalar) {
-          values("0.05");
-        }
-      }
-
-      timing() {
-        related_pin : "I1";
-        timing_type : combinational;
-
-        cell_rise(scalar) {
-          values("0.15");
-        }
-
-        cell_fall(scalar) {
-          values("0.15");
-        }
-
-        rise_transition(scalar) {
-          values("0.05");
-        }
-
-        fall_transition(scalar) {
-          values("0.05");
-        }
-      }
-
-      timing() {
-        related_pin : "select";
-        timing_type : combinational;
-
-        cell_rise(scalar) {
-          values("0.08");
-        }
-
-        cell_fall(scalar) {
-          values("0.08");
-        }
-
-        rise_transition(scalar) {
-          values("0.03");
-        }
-
-        fall_transition(scalar) {
-          values("0.03");
-        }
-      }
     }
 
   }
 
 }
-
