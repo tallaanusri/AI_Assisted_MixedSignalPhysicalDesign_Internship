@@ -690,24 +690,54 @@ AMUX2_3V 80 80 N
 | **config.tcl** | Configures `design_mux`, Sky130A PDK, `sky130_fd_sc_hd`, clock, DIE_AREA, EXTRA_LEFS/LIBS/GDS, and macro placement. | Reference repository configures the same OpenLane variables for analog macro integration. | 🟡 **Mostly Match** | Core configuration is correct. Minor parameter values (e.g., routing options, floorplan variables) may differ from the reference but do not change the overall flow. |
 | **macro.cfg** | `AMUX2_3V 80 80 N` (fixed placement inside a 200 × 200 µm die). | Uses the macro instance name with fixed placement coordinates and orientation. | 🟡 **Functionally Match** | Correct format and orientation. The only value that may differ is the exact placement coordinate used by the reference repository. The instance name must exactly match the one in `design_mux.v`. |
 
+# Note:
+After all debugging the finalized input files are placed in the [inputfiles](inputfiles)
+
 ---
 # Physical Design Journey:
 ---
 My physical Design Journey is Cleary in the [PD](PD/README.md)
 
 
+# 🤖 AI Assistance During the Project
 
+## AI Helped With
 
+- Understanding the repository structure
+- Explaining the OpenLane flow
+- Generating OpenLane configuration files
+- Explaining Magic and Netgen commands
+- Debugging LEF-related issues
+- Identifying configuration mistakes
+- Providing Tcl command guidance
+- Explaining physical design concepts
 
+---
 
+## AI Limitations
 
- 
+- Occasionally assumed incorrect macro interfaces.
+- Required manual verification of generated commands.
+- Could not determine every physical design issue automatically.
+- Engineering validation remained necessary throughout the implementation.
 
+---
 
+# 📖 Key Lessons Learned
 
+- Mixed-signal macros should always be treated as hard macros.
+- Accurate LEF files are essential for successful physical integration.
+- Proper macro placement significantly improves routing quality.
+- Power planning is equally important for analog and digital blocks.
+- DRC and LVS provide more reliable validation than visual inspection alone.
+- AI greatly accelerates learning and debugging but cannot replace engineering verification.
 
+---
 
+# ✅ Conclusion
 
+This project successfully implemented an AI-assisted RTL-to-GDSII physical design flow for the **design_mux** mixed-signal design using **OpenLane** and the **SKY130 PDK**.
 
+Throughout the implementation, AI assisted with understanding the design flow, generating configuration files, debugging issues, and explaining physical design concepts. However, all generated solutions were verified through OpenLane execution, Magic, KLayout, and manual analysis.
 
-
+The project demonstrates that AI can significantly improve productivity and learning in mixed-signal physical design while emphasizing the importance of engineering validation for achieving a correct and manufacturable layout.
