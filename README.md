@@ -738,8 +738,13 @@ My physical Design Task Journey is Cleary in the [PD](PD/README.md)
 
 # ✅ Conclusion
 
-This project successfully implemented an AI-assisted RTL-to-GDSII physical design flow for the **design_mux** mixed-signal design using **OpenLane** and the **SKY130 PDK**.
+## Conclusion
 
-Throughout the implementation, AI assisted with understanding the design flow, generating configuration files, debugging issues, and explaining physical design concepts. However, all generated solutions were verified through OpenLane execution, Magic, KLayout, and manual analysis.
+This project successfully implemented an AI-assisted RTL-to-GDSII physical design flow for the **design_mux** mixed-signal design using **OpenLane** and the **SKY130 PDK**. Throughout the implementation, AI served as a valuable assistant by helping to understand the physical design flow, generate configuration files, troubleshoot design issues, and explain key physical design concepts. However, every AI-generated solution was carefully validated through OpenLane execution, Magic, KLayout, and detailed manual analysis to ensure correctness and manufacturability.
 
-The project demonstrates that AI can significantly improve productivity and learning in mixed-signal physical design while emphasizing the importance of engineering validation for achieving a correct and manufacturable layout.
+The project demonstrates that AI can significantly enhance productivity, accelerate learning, and simplify complex design workflows in mixed-signal physical design. At the same time, it reinforces an important engineering principle: AI should be viewed as a powerful assistant rather than a replacement for engineering expertise. Although AI saves time and improves efficiency, it is not infallible. Engineers must always verify the accuracy of AI-generated outputs, critically evaluate the results, and understand the underlying concepts before applying them. Ultimately, reliable and manufacturable designs are achieved through a combination of AI assistance, engineering knowledge, and rigorous validation—not by relying on AI-generated results alone.
+
+
+AI can accelerate the design process, but engineering judgment ensures its correctness. Verify first, trust later.
+
+"The future belongs to engineers who know not only how to use AI, but also how to question, verify, and improve its outputs."
