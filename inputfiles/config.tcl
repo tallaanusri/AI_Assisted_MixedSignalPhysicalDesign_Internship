@@ -73,7 +73,12 @@ set ::env(MACRO_PLACEMENT_CFG) \
 #-------------------------------------------------------------
 # Power Distribution Network
 #-------------------------------------------------------------
+# Power Net Definitions
+set ::env(VDD_NETS) "VDD"
+set ::env(GND_NETS) "VSS"
 
+set ::env(VDD_PIN) "VDD"
+set ::env(GND_PIN) "VSS"
 # Vertical PDN pitch
 set ::env(FP_PDN_VPITCH) "153.6"
 
@@ -107,3 +112,11 @@ set ::env(FP_PDN_ENABLE_MACROS_GRID) 1
 
 # Connect macro power pins
 set ::env(FP_PDN_MACRO_HOOKS) "u_amux VDD VSS VDD VSS"
+# Disable post-synthesis STA (avoids write_db issue)
+set ::env(RUN_SSTA) 0
+
+# Disable resizer optimizations
+set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0

@@ -12,14 +12,14 @@ module design_mux (
     output wire pll_vco_ena,
     output wire pll_cp_ena,
     output wire pll_bias_ena,
-    output wire [2:0] pll_trim,
+    output wire [3:0] pll_trim,
     output wire pll_bypass,
     output wire irq,
-    output wire trap,
-    input  wire [31:0] mfgr_id,
-    input  wire [31:0] prod_id,
-    input  wire [31:0] mask_rev_in,
-    output wire [31:0] mask_rev,
+    input wire trap,
+    output wire [11:0] mfgr_id,
+    output wire [7:0] prod_id,
+    input  wire [3:0] mask_rev_in,
+    output wire [3:0] mask_rev,
     output wire out
 );
 
@@ -68,5 +68,7 @@ module design_mux (
 
     // Example control logic for the analog mux
     assign select = reg_ena;
+   // Connect SPI output to the top-level output
+    assign SDO = I0;
 
 endmodule
