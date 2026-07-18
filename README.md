@@ -26,7 +26,7 @@ The primary objective is to demonstrate how AI can accelerate learning, problem-
 
 ---
 
-## Stage 1 -Analysis of **vsdmixedsignalflow** Repository:
+## Step 1 -Analysis of **vsdmixedsignalflow** Repository:
 ---
 # Objective:
 
@@ -169,17 +169,17 @@ Please explain everything in simple language with diagrams or flowcharts whereve
 ChatGPT Output File :- [MixedSignalFlow_Overview](MixedSignalFlow_Overview/README.md)
 This alone will save hours Of time and It also Given the basic & Clear understanding of the overall **vsdmixedsignalflow** repository.
 
-# Conclusion at Stage 1:
+# Conclusion at Step 1:
 
 Actually Using AI in this Stage helped in saving the time as well as after reading the AI version of the repository,It became easy in understading all the things in repostary very well.Here,at this Stage AI done a great a job and It helps In learning the new Concepts easily even to beginner level Candidate.
 
 ---
-## Stage 2 - Analysing about required input files:
+## Step 2 - Analysing about required input files:
 ---
 
 # Objective :
 
-After Understanding on the overall **vsdmixedsignalflow** repository & Its Project Problem Statement Instead of running OpenLane,I wanted to understand what are The files exist In this project  why , where there are used in the flow, and what may happen if any of file was missing and what Problem It leads to the whole project e.t.c.
+After Understanding on the overall **vsdmixedsignalflow** repository & Its Project Problem Statement Instead of running OpenLane,I wanted to understand what are The files required In this project  why , where there are used in the flow, and what may happen if any of file was missing and what Problem It leads to the whole project e.t.c.
 So,Instead of directly using the files from the reference repository, I used AI to analyze the mixed-signal design Flow and It requirements.
 
 # Prompt:
@@ -246,18 +246,19 @@ Without `verilog_to_lib.pl`, the required Liberty file cannot be generated autom
 
 ---
 
-## Conclusion At Stage 2 :
+## Conclusion At Step 2 :
 
 The comparison with the reference project shows that both `macro.cfg` and `verilog_to_lib.pl` are essential support files for analog macro integration in OpenLane. While `macro.cfg` ensures the analog macro is placed at the correct physical location during floorplanning, `verilog_to_lib.pl` generates the Liberty file required for timing characterization and macro recognition. Omitting either of these files can interrupt the implementation flow and prevent successful completion of the Analog Place-and-Route process.
 
 Concluding That Using the AI saves Time but it doesn't gives Everything Correctly always so,we have to make sure to verify and understand the results of AI whether correct or not. ** Never trust AI-generated interfaces without verification.**
 
 ---
-## Stage 3 - Understanding The Tools and Softwares:
+## Step 3 - Understanding The Tools and Softwares:
 ---
-# Objective :
+After understanding the required files and how they work in this flow, I felt that instead of downloading the required input files first i want to know the tools that gone use in this project for better understanding of which file to run at which application and how each application software play a role in this flow.
 
-To Know About the OpenLane architecture and Sky130 and docker, there role in the **RTL-to-GDS Mixed-Signal Physical Design**.
+# Objective :
+ To Know About the OpenLane architecture and Sky130 and docker, there role in the **RTL-to-GDS Mixed-Signal Physical Design**.
 
 # Prompt:
 
@@ -284,7 +285,7 @@ All Information About the OpenLane architecture and Sky130 and docker is in [Abo
 Tools Installation Process is in [InstallationGuide](InstallationGuide/README.md)
 
 ---
-## Stage 4 - Generating Input Files by AI :
+## Step 4 - Generating Input Files by AI :
 ---
 # Objective :
 Every file was created using a focused and well-defined prompt to ensure consistency,hierarchy in the design particularly for module names, port lists, pin names, and net connections.This approach was intentionally adopted because even a minor mismatch in ports or signal names can lead to hierarchy inconsistencies, compilation errors, or integration failures during the OpenLane flow. Maintaining identical interfaces across all input files is therefore essential for successful macro integration, floorplanning, placement, routing, and verification. Ensuring this consistency significantly reduces debugging effort and improves the overall reliability of the Analog Place-and-Route process.
@@ -691,12 +692,12 @@ AMUX2_3V 80 80 N
 | **macro.cfg** | `AMUX2_3V 80 80 N` (fixed placement inside a 200 × 200 µm die). | Uses the macro instance name with fixed placement coordinates and orientation. | 🟡 **Functionally Match** | Correct format and orientation. The only value that may differ is the exact placement coordinate used by the reference repository. The instance name must exactly match the one in `design_mux.v`. |
 
 # Note:
-After all debugging the finalized input files are placed in the [inputfiles](inputfiles)
+After successful completion of solving all the debugs that faced while running the rtl to gds flow(on using above AI generated codes), the finalized correct input files are placed in this [inputfiles](inputfiles)
 
 ---
 # Physical Design Journey:
 ---
-My physical Design Journey is Cleary in the [PD](PD/README.md)
+My physical Design Task Journey is Cleary in the [PD](PD/README.md)
 
 
 # 🤖 AI Assistance During the Project
