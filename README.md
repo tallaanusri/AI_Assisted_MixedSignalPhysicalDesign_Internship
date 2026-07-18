@@ -693,6 +693,7 @@ AMUX2_3V 80 80 N
 
 # Note:
 After successful completion of solving all the debugs that faced while running the rtl to gds flow(on using above AI generated codes), the finalized correct input files are placed in this [inputfiles](inputfiles)
+and the final output screenshots are at the [outputfiles](outputfiles) 
 
 ---
 # Physical Design Journey:
