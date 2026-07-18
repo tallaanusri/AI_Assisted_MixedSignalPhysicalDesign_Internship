@@ -55,7 +55,7 @@ Explain:
 7. Where analog macro integration happens
 8. Explain every important file in simple language.
 ```
-Then my ChatGPT improved my prompt and given me the following Advanced Prompt for better Result.
+Then my ChatGPT improved my prompt and given me the following Advanced Prompts for better Result.
 
 # Advanced Prompt – 
 ```
@@ -167,11 +167,11 @@ Please explain everything in simple language with diagrams or flowcharts whereve
 # Output :
 
 ChatGPT Output File :- [MixedSignalFlow_Overview](MixedSignalFlow_Overview/README.md)
-This alone will save hours Of time and It also Given the basic & Clear understanding of the overall **vsdmixedsignalflow** repository.
+studying this saved hours Of time and It also Given the basic & Clear understanding of the overall **vsdmixedsignalflow** repository.
 
 # Conclusion at Step 1:
 
-Actually Using AI in this Stage helped in saving the time as well as after reading the AI version of the repository,It became easy in understading all the things in repostary very well.Here,at this Stage AI done a great a job and It helps In learning the new Concepts easily even to beginner level Candidate.
+Actually Using AI in this Stage helped in saving the time as well as after reading the AI version of the repository,It became easy in understading all the things in  refrence repository very well.Here,at this Stage AI done a great job and It helps In learning the new Concepts easily even to a beginner level Candidate.
 
 ---
 ## Step 2 - Analysing about required input files:
@@ -212,7 +212,7 @@ I am a beginner in OpenLane and analog physical design, so explain everything fr
 
 # Comparsion Of Both AI & Refrence Input Files (1st AI mistake discovered):
 
-While comparing the AI given input files list with the reference project (**vsdmixedsignalflow**), two important files were identified as missing in the AI given file list. These files are essential for successfully integrating an analog macro into the OpenLane flow.
+While comparing the AI given input files list with the reference project (**vsdmixedsignalflow**), two important files were identified as missing in the AI given file list. These files are essential for successfully integrating an analog macro into the OpenLane flow,Reason for it and about those files are as follow:
 
 ### 1. `macro.cfg`
 
@@ -250,7 +250,7 @@ Without `verilog_to_lib.pl`, the required Liberty file cannot be generated autom
 
 The comparison with the reference project shows that both `macro.cfg` and `verilog_to_lib.pl` are essential support files for analog macro integration in OpenLane. While `macro.cfg` ensures the analog macro is placed at the correct physical location during floorplanning, `verilog_to_lib.pl` generates the Liberty file required for timing characterization and macro recognition. Omitting either of these files can interrupt the implementation flow and prevent successful completion of the Analog Place-and-Route process.
 
-Concluding That Using the AI saves Time but it doesn't gives Everything Correctly always so,we have to make sure to verify and understand the results of AI whether correct or not. ** Never trust AI-generated interfaces without verification.**
+Concluding That Using the AI saves Time but it doesn't gives Everything Correct always so,we have to make sure to verify and understand the results of AI whether correct or not. ** Never trust AI-generated interfaces without verification.**
 
 ---
 ## Step 3 - Understanding The Tools and Softwares:
