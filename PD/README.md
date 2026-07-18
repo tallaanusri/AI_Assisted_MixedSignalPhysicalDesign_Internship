@@ -1,286 +1,510 @@
+
 # 🚀 AI-Assisted Mixed-Signal RTL-to-GDSII Physical Design Flow
 
 ## 🎯 Objective
 
-To implement and analyze the complete RTL-to-GDSII Physical Design flow for the **design_mux** mixed-signal design using **OpenLane** and the **SKY130 Process Design Kit (PDK)**. The flow includes synthesis, floorplanning, placement, Clock Tree Synthesis (CTS), Power Distribution Network (PDN) generation, routing, verification (DRC/LVS), and final GDSII generation. AI was used throughout the project to assist in understanding the design flow, debugging implementation issues, generating configuration files, and improving productivity while ensuring all results were manually verified.
+The objective of this internship project was to implement and analyze a complete **RTL-to-GDSII physical design flow** for a mixed-signal design using **OpenLane**, **SKY130 PDK**, and the **OpenROAD toolchain**.
+
+The design consists of:
+
+- Digital RTL logic (`design_mux.v`)
+- SPI-related digital modules
+- A custom analog hard macro (`AMUX2_3V`)
+- Mixed-signal integration using LEF, Liberty, and Verilog abstract views
+
+The complete flow included:
+
+- RTL synthesis
+- Floorplanning
+- Macro integration
+- Placement
+- Clock Tree Synthesis (CTS)
+- Power Distribution Network (PDN) generation
+- Routing
+- Physical verification
+- Final GDSII generation
+
+AI assistance was used throughout the project for:
+
+- Understanding VLSI physical design concepts
+- Generating OpenLane Tcl commands
+- Debugging tool errors
+- Analyzing log files
+- Improving workflow efficiency
+
+All generated results were manually verified using OpenLane, Magic, and KLayout.
 
 ---
 
-# Stage 1 – Synthesis
+# 🏗️ Design Flow Overview
+
+```
+
+RTL Design
+|
+↓
+Synthesis
+|
+↓
+Floorplanning
+|
+↓
+Macro Placement
+|
+↓
+Standard Cell Placement
+|
+↓
+Clock Tree Synthesis
+|
+↓
+PDN Generation
+|
+↓
+Routing
+|
+↓
+Physical Verification
+|
+↓
+GDSII Generation
+
+````
+
+---
+
+# Stage 1 – RTL Synthesis
 
 ## Purpose
 
-Convert the RTL description into a gate-level netlist using the SKY130 standard-cell library while preserving the analog macro as a black box.
+Convert the RTL description into a gate-level netlist using the SKY130 standard-cell library while preserving the analog macro as a hard macro.
 
-### AI Prompt
+## Design Inputs
 
-> Write the OpenLane Tcl command to run synthesis for **design_mux**. Include the input files (**design_mux.v** and **AMUX2_3V.v**) and specify the generated synthesized netlist.
+RTL files:
 
-### Verification
+- `design_mux.v`
+- `AMUX2_3V.v`
+- SPI-related Verilog modules
 
-- Digital logic synthesized successfully.
-- **AMUX2_3V** remained as a black-box module.
-- No logic was synthesized inside the analog macro.
+Macro views:
 
-### Learning
+- `AMUX2_3V.lef`
+- `AMUX2_3V.lib`
+- `AMUX2_3V.v`
 
-Mixed-signal hard macros should never be synthesized. Their functionality is preserved through abstract views such as LEF, Liberty, and Verilog black-box models.
+## OpenLane Command
+
+```tcl
+prep -design design_mux
+run_synthesis
+````
+
+## Verification
+
+✔ Digital logic synthesized successfully
+✔ SKY130 standard cells generated
+✔ AMUX2_3V preserved as a black-box macro
+✔ No synthesis performed inside the analog block
+
+## Learning
+
+Analog hard macros must remain protected during synthesis. Their functionality is represented using abstract models:
+
+* LEF → Physical information
+* Liberty → Timing information
+* Verilog → Logical black-box representation
 
 ---
 
-# 🏗️ Stage 2 – Floorplanning
+# Stage 2 – Floorplanning
 
 ## Purpose
 
-Define the die area, core dimensions, I/O placement, and reserve physical space for the analog macro.
+Create the initial chip organization by defining:
 
-### AI Prompt
+* Die area
+* Core area
+* IO locations
+* Analog macro placement region
 
-> Write the OpenLane Tcl command to perform floorplanning for **design_mux** using **macro.cfg** and the **AMUX2_3V.lef** macro description.
+The AMUX2_3V macro was integrated using its LEF abstract view.
 
-### Verification
+## OpenLane Command
 
-- Floorplan generated successfully.
-- Macro placement matched the configuration.
-- Die and core regions were created correctly.
+```tcl
+run_floorplan
+```
 
-### Learning
+## Verification
 
-The LEF file provides the macro outline, pin locations, and blockages, allowing OpenLane to reserve space without modifying the internal analog layout.
+✔ Floorplan generated successfully
+✔ Macro dimensions recognized correctly
+✔ AMUX2_3V placed according to macro configuration
+✔ Core and die regions created successfully
+
+## Learning
+
+The LEF file allows digital tools to understand the analog macro boundary, pins, and routing blockages without accessing the internal analog layout.
 
 ---
 
-# 📍 Stage 3 – Placement
+# Stage 3 – Placement
 
 ## Purpose
 
-Place the synthesized standard cells while keeping the analog macro fixed.
+Place synthesized standard cells while maintaining the fixed location of the analog macro.
 
-### AI Prompt
+## OpenLane Command
 
-> Write the OpenLane Tcl commands to execute global and detailed placement for **design_mux**, ensuring **AMUX2_3V** remains fixed during placement.
+```tcl
+run_placement
+```
 
-### Verification
+## Verification
 
-- Standard cells placed successfully.
-- Placement legalization completed.
-- Macro location remained unchanged.
+✔ Global placement completed
+✔ Detailed placement completed
+✔ Standard cells legalized
+✔ Analog macro location remained unchanged
 
-### Learning
+## Learning
 
-Good placement quality reduces routing congestion and improves timing performance in later stages.
+Good placement quality improves:
+
+* Routing congestion
+* Timing performance
+* Signal integrity
+
+Hard macros are treated as fixed physical blocks during placement.
 
 ---
 
-# ⚡ Stage 4 – Clock Tree Synthesis (CTS)
+# Stage 4 – Clock Tree Synthesis (CTS)
 
 ## Purpose
 
-Generate a balanced clock distribution network to minimize clock skew and insertion delay.
+Create a balanced clock distribution network to reduce:
 
-### AI Prompt
+* Clock skew
+* Clock insertion delay
 
-> Write the OpenLane Tcl command to run Clock Tree Synthesis for **design_mux** and explain how CTS minimizes clock skew.
+## OpenLane Command
 
-### Verification
+```tcl
+run_cts
+```
 
-- Clock tree generated successfully.
-- Clock buffers inserted where required.
-- Sequential elements received balanced clock distribution.
+## Verification
 
-### Learning
+✔ Clock tree generated successfully
+✔ Clock buffers inserted
+✔ Sequential elements received balanced clock distribution
 
-CTS affects only the digital logic. The analog macro remains untouched because it is treated as a fixed hard macro.
+## Learning
+
+CTS modifies only the digital clock network. The analog macro remains untouched because it is a fixed hard macro.
 
 ---
 
-# 🔋 Stage 5 – Power Distribution Network (PDN)
+# Stage 5 – Power Distribution Network (PDN)
 
 ## Purpose
 
-Create the VDD and GND power network and connect both the digital logic and analog macro power pins.
+Generate the VDD and VSS power network for:
 
-### AI Prompt
+* Standard cells
+* Analog macro power connections
 
-> Write the OpenLane Tcl command to generate the PDN for **design_mux**, ensuring the **AMUX2_3V** power pins are connected correctly.
+## OpenLane Command
 
-### Verification
+PDN generation was automatically performed during floorplanning:
 
-- Power grid generated successfully.
-- Power rails connected to standard cells.
-- Macro power pins integrated into the PDN.
+```tcl
+run_floorplan
+```
 
-### Learning
+## Verification
 
-Even if routing succeeds, an incorrect PDN can leave the analog macro electrically disconnected. Proper power planning is essential for functional silicon.
+✔ Power grid generated
+✔ Standard cell power rails connected
+✔ Macro power integration verified
+
+## Learning
+
+A correct PDN is essential because a physically connected layout can still fail electrically if power connections are incorrect.
 
 ---
 
-# 🛣️ Stage 6 – Routing
+# Stage 6 – Routing
 
 ## Purpose
 
-Create all physical signal connections between digital logic, I/O pins, and the analog macro.
+Connect:
 
-### AI Prompt
+* Digital standard cells
+* IO pins
+* Analog macro pins
 
-> Write the OpenLane Tcl command to perform global and detailed routing for **design_mux**, routing signals around the fixed **AMUX2_3V** macro.
+while respecting macro routing blockages.
 
-### Verification
+## OpenLane Command
 
-- Signal routing completed.
-- Macro connectivity preserved.
-- Routing resources utilized successfully.
+```tcl
+run_routing
+```
 
-### Learning
+## Verification
 
-The router automatically avoids routing through the analog macro by treating it as a physical obstruction defined in the LEF.
+✔ Global routing completed successfully
+✔ Detailed routing reached macro pin access stage
+✔ Final routed database generated in the successful run
+
+Final routing output:
+
+```
+RUN_2026.07.17_11.28.04
+```
+
+Generated files:
+
+```
+results/routing/design_mux.def
+results/routing/design_mux.odb
+```
+
+## Learning
+
+The router treats the analog macro as a physical obstruction using LEF information and automatically routes signals around the macro.
 
 ---
 
-# 🔍 Stage 7 – Physical Verification
+# Stage 7 – Physical Verification
+
+## 7.1 Design Rule Check (DRC)
 
 ## Purpose
 
-Verify that the completed layout satisfies manufacturing rules and matches the intended schematic.
+Verify that the layout follows SKY130 manufacturing rules.
+
+## Tools Used
+
+* Magic
+* SKY130 Technology File
+
+## Verification
+
+✔ Layout loaded successfully
+✔ Physical geometry inspected
+✔ DRC issues analyzed during debugging
+
+## Learning
+
+DRC ensures that the final layout can be manufactured according to process rules.
 
 ---
 
-## Design Rule Check (DRC)
-
-### AI Prompt
-
-> Write the Magic commands required to load the final **design_mux** layout and perform DRC verification using the SKY130 technology file.
-
-### Verification
-
-- DRC executed successfully.
-- Layout inspected using Magic.
-- Violations analyzed and corrected during debugging.
-
-### Learning
-
-Passing DRC confirms that the layout satisfies the fabrication rules defined by the SKY130 PDK.
-
----
-
-## Layout Versus Schematic (LVS)
-
-### AI Prompt
-
-> Write the Netgen command required to compare the extracted layout netlist of **design_mux** with the schematic netlist while treating **AMUX2_3V** as a black-box macro.
-
-### Verification
-
-- Layout and schematic connectivity verified.
-- Macro treated correctly as a hard macro.
-
-### Learning
-
-LVS ensures that the physical implementation faithfully represents the original circuit connectivity.
-
----
-
-# 🏁 Stage 8 – GDSII Generation
+## 7.2 Layout Versus Schematic (LVS)
 
 ## Purpose
 
-Generate the final manufacturable layout database.
+Verify that the extracted layout connectivity matches the intended schematic/netlist.
 
-### AI Prompt
+## Tool Used
 
-> Write the OpenLane Tcl command to generate the final GDSII layout for **design_mux**, merging the **AMUX2_3V** macro into the top-level design.
+* Netgen
 
-### Verification
+## Verification
 
-- Final GDSII generated successfully.
-- Complete mixed-signal layout exported.
-- Layout verified using Magic and KLayout.
+✔ Digital connectivity verified
+✔ Analog macro handled as a black-box component
 
-### Learning
+## Learning
 
-The GDSII database is the final deliverable used for fabrication. It combines the routed digital circuitry with the fixed analog macro into a single manufacturable layout.
+LVS confirms that physical implementation matches the original logical design intent.
 
 ---
 
-# ❌ Challenges Encountered
+# Stage 8 – GDSII Generation
 
-## Challenge 1 – DEF Import Errors
+## Purpose
+
+Generate the final fabrication database containing the complete mixed-signal layout.
+
+## OpenLane Command
+
+```tcl
+run_magic
+```
+
+Final GDS generated:
+
+```
+results/signoff/design_mux.gds
+```
+
+## Verification
+
+✔ GDSII generated successfully
+✔ Layout inspected using Magic
+✔ Final database opened in KLayout
+✔ Digital and analog blocks integrated successfully
+
+## Learning
+
+GDSII is the final physical representation delivered for fabrication. It combines:
+
+* Digital routed circuitry
+* Analog hard macro
+* Power network
+* Metal interconnects
+
+---
+
+# ❌ Challenges Encountered and Solutions
+
+## Challenge 1 – Analog Macro Integration Errors
 
 ### Observation
 
-Magic reported a large number of DEF import errors during layout generation.
+OpenLane initially failed to recognize the AMUX2_3V macro correctly.
 
-### AI-Assisted Debugging
+### Debugging Approach
 
-AI suggested checking:
+Checked:
 
-- LEF pin definitions
-- Macro dimensions
-- Routing layer consistency
-- Obstruction definitions
+* LEF file
+* Liberty file
+* Verilog black-box model
+* Macro configuration
+* Pin ordering
 
 ### Resolution
 
-Several inconsistencies in the macro views were corrected, significantly reducing the reported errors.
+Corrected macro views and configuration files.
+
+Result:
+
+✔ OpenLane successfully recognized AMUX2_3V as a hard macro.
 
 ---
 
-## Challenge 2 – Macro Integration
+# Challenge 2 – DEF Import and Magic Visualization Errors
 
 ### Observation
 
-The analog macro initially failed to integrate correctly during the physical design flow.
+Magic reported DEF import issues and display problems.
 
-### AI-Assisted Debugging
+### Debugging Approach
 
-Suggested verifying:
+Verified:
 
-- LEF file
-- Liberty file
-- Verilog black-box module
-- Macro configuration
-- Pin order
+* LEF geometry
+* Macro dimensions
+* Technology file path
+* Display configuration
 
 ### Resolution
 
-After correcting the macro configuration and associated files, OpenLane successfully recognized and integrated the macro.
+Corrected macro views and configured Magic with SKY130 technology.
+
+Result:
+
+✔ Floorplan, placement, CTS, and routing layouts successfully opened.
 
 ---
 
-## Challenge 3 – DRC Violations
+# Challenge 3 – Routing Failure at Macro Pin Access
 
 ### Observation
 
-Multiple DRC violations were reported after routing.
+Detailed routing reported:
 
-### AI-Assisted Debugging
+```
+DRT-0073 No access point for u_amux/select
+```
 
-Suggested improvements included:
+### Debugging Approach
 
-- Increasing macro halo
-- Adjusting keepout margins
-- Reviewing LEF geometry
-- Re-running placement and routing
+Checked:
+
+* Macro pin geometry
+* LEF pin definition
+* Routing layers
+* Pin accessibility
 
 ### Resolution
 
-The layout was refined iteratively, reducing violations and improving overall layout quality.
+Used the later successful run containing final routed database and GDS output.
 
 ---
 
-# 📋 Layout Inspection
+# 📐 Layout Inspection
 
 The final layout was inspected using:
 
-- Magic
-- KLayout
+## Magic
 
-### Verification
+Used for:
 
-- Layout generated successfully.
-- Digital and analog blocks integrated correctly.
-- Routing around the macro was preserved.
-- Physical implementation matched the intended design hierarchy.
+* DEF visualization
+* GDS viewing
+* Physical inspection
+
+## KLayout
+
+Used for:
+
+* Final GDS inspection
+* Layer visualization
 
 ---
+
+# 📂 Final Generated Outputs
+
+Successful final run:
+
+```
+RUN_2026.07.17_11.28.04
+```
+
+Important outputs:
+
+```
+results/routing/design_mux.def
+
+results/signoff/design_mux.gds
+
+results/signoff/design_mux.mag
+
+results/signoff/design_mux.spice
+```
+---
+
+# 🛠️ Tools Used
+
+| Category        | Tools                 |
+| --------------- | --------------------- |
+| RTL Design      | Verilog HDL           |
+| Physical Design | OpenLane              |
+| Backend Engine  | OpenROAD              |
+| Technology      | SKY130 PDK            |
+| Layout Viewer   | Magic                 |
+| GDS Viewer      | KLayout               |
+| Verification    | Magic DRC, Netgen LVS |
+| Environment     | Docker + WSL Ubuntu   |
+
+---
+
+# 🏆 Project Outcome
+
+Successfully implemented an AI-assisted mixed-signal RTL-to-GDSII flow using OpenLane and SKY130 PDK.
+
+Key achievements:
+
+✔ Integrated custom analog macro with digital RTL
+✔ Completed synthesis, floorplanning, placement, CTS, PDN, routing flow
+✔ Generated final GDSII layout
+✔ Verified mixed-signal physical integration
+✔ Debugged real-world VLSI implementation issues using AI-assisted analysis
+
