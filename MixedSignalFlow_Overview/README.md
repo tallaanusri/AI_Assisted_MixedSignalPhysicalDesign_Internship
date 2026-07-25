@@ -48,6 +48,9 @@ The repository is organized into the following major directories:
 
 # 3. Complete RTL-to-GDS Flow
 
+<img width="1536" height="1024" alt="flow" src="https://github.com/user-attachments/assets/bab65ae2-db6b-474b-a4d5-7ed70abc2975" />
+
+
 ## Step 1 – RTL Design
 
 **Tool:** Verilog
