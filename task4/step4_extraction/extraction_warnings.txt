@@ -1,0 +1,4 @@
+Warning: Ports "VSS" and "select" are electrically shorted.
+Warning: Ports "VSS" and "I1" are electrically shorted.
+Warning: Ports "VSS" and "I0" are electrically shorted.
+Warning: Ports "VDD" and "out" are electrically shorted.
