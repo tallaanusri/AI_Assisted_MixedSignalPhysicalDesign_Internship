@@ -1,0 +1,10 @@
+Layout Status
+
+✓ Layout generated
+✓ Layout opened in Magic
+✓ Extraction completed
+
+✗ Signal pins shorted
+✗ Incorrect extracted subckt interface
+✗ LVS mismatch
+✗ Layout requires routing correction
