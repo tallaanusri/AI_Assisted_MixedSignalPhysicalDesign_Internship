@@ -1,0 +1,31 @@
+*=========================================================
+* Testbench for AMUX2_3V
+*=========================================================
+
+.include "AMUX2_3V_SUBCKT.spice"
+
+.param VDDVAL=1.8
+
+VDD VDD 0 {VDDVAL}
+VSS VSS 0 0
+
+* Inputs
+VIN0 I0 0 PULSE(0 {VDDVAL} 0n 100p 100p 20n 40n)
+
+VIN1 I1 0 PULSE({VDDVAL} 0 0n 100p 100p 20n 40n)
+
+VSEL select 0 PULSE(0 {VDDVAL} 10n 100p 100p 20n 40n)
+
+* DUT
+XMUX I0 I1 select out VDD VSS AMUX2_3V
+
+.tran 10p 80n
+
+.control
+run
+
+plot v(I0) v(I1) v(select) v(out)
+
+.endc
+
+.end
