@@ -1,0 +1,11 @@
+* NGSPICE file created from AMUX2_3V_AI.ext - technology: sky130A
+
+.subckt AMUX2_3V_AI VDD VSS
+X0 VSS a_1030_440# VSS VSUBS sky130_fd_pr__nfet_01v8 ad=0.2 pd=1.8 as=0.96 ps=8 w=0.4 l=0.2
+X1 VDD a_1030_660# VDD w_160_600# sky130_fd_pr__pfet_01v8 ad=0.2 pd=1.8 as=1.21 ps=10 w=0.4 l=0.2
+X2 VSS a_1670_440# VSS VSUBS sky130_fd_pr__nfet_01v8 ad=0.2 pd=1.8 as=0 ps=0 w=0.4 l=0.2
+X3 VDD a_1670_660# VDD w_160_600# sky130_fd_pr__pfet_01v8 ad=0.2 pd=1.8 as=0 ps=0 w=0.4 l=0.2
+X4 a_440_300# a_390_440# a_300_300# VSUBS sky130_fd_pr__nfet_01v8 ad=0.28 pd=2.2 as=0.2 ps=1.8 w=0.4 l=0.2
+X5 a_390_440# a_390_440# a_300_780# w_160_600# sky130_fd_pr__pfet_01v8 ad=0.28 pd=2.2 as=0.2 ps=1.8 w=0.4 l=0.2
+.ends
+

@@ -1,0 +1,93 @@
+*========================================================
+* AMUX2_3V_NEW
+* Fresh SKY130 transistor-level 2:1 analog MUX
+* Transmission-gate architecture
+*
+* Functional relationship:
+*   SEL = 0 -> OUT = I0
+*   SEL = 1 -> OUT = I1
+*
+* External pins:
+*   I0 I1 SEL OUT VDD VSS
+*========================================================
+
+.title AMUX2_3V_NEW
+
+* SKY130 device model files
+.include "/root/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__nfet_01v8__tt.pm3.spice"
+.include "/root/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__pfet_01v8__tt.pm3.spice"
+
+.param VDDVAL=1.8
+
+*========================================================
+* Power supplies
+*========================================================
+
+VDD_SOURCE VDD 0 {VDDVAL}
+VSS_SOURCE VSS 0 0
+
+*========================================================
+* Input stimulus
+*========================================================
+
+* I0 toggles between 0 and VDD
+VIN0 I0 0 PULSE(0 {VDDVAL} 0n 100p 100p 20n 40n)
+
+* I1 complementary pattern
+VIN1 I1 0 PULSE({VDDVAL} 0 0n 100p 100p 20n 40n)
+
+* Select signal
+VSEL SEL 0 PULSE(0 {VDDVAL} 10n 100p 100p 20n 40n)
+
+*========================================================
+* SELECT INVERTER
+*
+* SELB = NOT(SEL)
+*========================================================
+
+MSEL_N SELB SEL VSS VSS sky130_fd_pr__nfet_01v8__tt \
+    L=0.15u W=0.50u
+
+MSEL_P SELB SEL VDD VDD sky130_fd_pr__pfet_01v8__tt \
+    L=0.15u W=1.00u
+
+*========================================================
+* TRANSMISSION GATE 0
+*
+* Active when SEL = 0
+* NMOS gate = SELB
+* PMOS gate = SEL
+*========================================================
+
+MTG0_N OUT I0 SELB VSS sky130_fd_pr__nfet_01v8__tt \
+    L=0.15u W=1.00u
+
+MTG0_P OUT I0 SEL VDD sky130_fd_pr__pfet_01v8__tt \
+    L=0.15u W=2.00u
+
+*========================================================
+* TRANSMISSION GATE 1
+*
+* Active when SEL = 1
+* NMOS gate = SEL
+* PMOS gate = SELB
+*========================================================
+
+MTG1_N OUT I1 SEL VSS sky130_fd_pr__nfet_01v8__tt \
+    L=0.15u W=1.00u
+
+MTG1_P OUT I1 SELB VDD sky130_fd_pr__pfet_01v8__tt \
+    L=0.15u W=2.00u
+
+*========================================================
+* Simulation
+*========================================================
+
+.tran 10p 80n
+
+.control
+run
+write simulation/AMUX2_3V_NEW.raw
+.endc
+
+.end
