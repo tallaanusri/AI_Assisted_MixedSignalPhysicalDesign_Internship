@@ -1,0 +1,29 @@
+* AMUX2_3V LVS schematic netlist
+* Matching Magic extracted layout
+
+.subckt AMUX2_3V select I0 out I1 VSS VDD
+
+* PMOS devices
+
+X0 out select I1 w_0_291# sky130_fd_pr__pfet_01v8 \
+ad=0.631 pd=3.18 as=0.525 ps=2.92 w=0.82 l=0.2
+
+X2 a_90_123# select VDD w_0_291# sky130_fd_pr__pfet_01v8 \
+ad=0.631 pd=3.18 as=0.525 ps=2.92 w=0.82 l=0.2
+
+X4 I0 a_90_123# out w_0_291# sky130_fd_pr__pfet_01v8 \
+ad=0.64 pd=3.2 as=0.517 ps=2.9 w=0.82 l=0.2
+
+
+* NMOS devices
+
+X1 out a_90_123# I1 VSS sky130_fd_pr__nfet_01v8 \
+ad=0.616 pd=3.14 as=0.512 ps=2.88 w=0.8 l=0.2
+
+X3 a_90_123# select VSS VSS sky130_fd_pr__nfet_01v8 \
+ad=0.616 pd=3.14 as=0.512 ps=2.88 w=0.8 l=0.2
+
+X5 I0 select out VSS sky130_fd_pr__nfet_01v8 \
+ad=0.624 pd=3.16 as=0.504 ps=2.86 w=0.8 l=0.2
+
+.ends AMUX2_3V

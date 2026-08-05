@@ -1,0 +1,114 @@
+magic
+tech sky130A
+timestamp 1785560000
+<< nwell >>
+rect 80 300 1120 570
+<< ndiff >>
+rect 150 150 290 190
+rect 470 150 610 190
+rect 790 150 930 190
+<< pdiff >>
+rect 150 390 290 430
+rect 470 390 610 430
+rect 790 390 930 430
+rect 1010 430 1060 480
+rect 1010 100 1060 150
+<< poly >>
+rect 200 120 220 460
+rect 520 360 540 460
+rect 520 120 540 220
+rect 840 360 860 460
+rect 840 120 860 220
+<< ndiffc >>
+rect 160 155 190 185
+rect 250 155 280 185
+rect 480 155 510 185
+rect 570 155 600 185
+rect 800 155 830 185
+rect 890 155 920 185
+<< pdiffc >>
+rect 160 395 190 425
+rect 250 395 280 425
+rect 480 395 510 425
+rect 570 395 600 425
+rect 800 395 830 425
+rect 890 395 920 425
+rect 1015 435 1055 475
+rect 1015 105 1055 145
+<< polycont >>
+rect 195 220 225 250
+rect 515 330 545 360
+rect 515 220 545 250
+rect 835 330 865 360
+rect 835 220 865 250
+<< locali >>
+rect 250 250 280 410
+rect 220 235 280 265
+rect 320 170 480 200
+rect 320 400 480 430
+rect 640 170 800 200
+rect 640 400 800 430
+rect 600 170 720 200
+rect 600 400 720 430
+rect 700 170 800 200
+rect 700 400 800 430
+rect 920 170 970 200
+rect 920 400 970 430
+rect 195 235 225 265
+rect 515 235 545 265
+rect 515 330 545 360
+rect 835 235 865 265
+rect 835 330 865 360
+rect 1015 145 1055 170
+rect 1015 410 1055 435
+<< mcon >>
+rect 330 170 350 190
+rect 330 400 350 420
+rect 650 170 670 190
+rect 650 400 670 420
+rect 700 170 720 190
+rect 700 400 720 420
+rect 930 170 950 190
+rect 930 400 950 420
+rect 1015 150 1055 170
+rect 1015 410 1055 435
+<< metal1 >>
+rect 0 0 1200 30
+rect 0 570 1200 600
+rect 320 30 350 190
+rect 320 400 350 570
+rect 640 30 670 190
+rect 640 400 670 570
+rect 700 30 720 190
+rect 700 400 720 570
+rect 930 30 950 190
+rect 930 400 950 570
+rect 1015 0 1055 170
+rect 1015 430 1055 600
+rect 110 30 140 280
+rect 110 250 220 280
+rect 410 250 440 520
+rect 410 490 520 520
+rect 410 250 540 280
+rect 760 250 790 520
+rect 760 490 840 520
+rect 760 250 860 280
+<< labels >>
+flabel metal1 s 335 45 335 45 0 FreeSans 120 0 0 0 I0
+port 1 nsew signal input
+flabel metal1 s 655 45 655 45 0 FreeSans 120 0 0 0 I1
+port 2 nsew signal input
+flabel metal1 s 125 45 125 45 0 FreeSans 120 0 0 0 select
+port 3 nsew signal input
+flabel metal1 s 710 555 710 555 0 FreeSans 120 0 0 0 out
+port 4 nsew signal output
+flabel metal1 s 1100 585 1100 585 0 FreeSans 120 0 0 0 VDD
+port 5 nsew power bidirectional
+flabel metal1 s 1100 15 1100 15 0 FreeSans 120 0 0 0 VSS
+port 6 nsew ground bidirectional
+<< properties >>
+string LEFclass CORE
+string LEFsite unithddbl
+string LEForigin 0 0
+string FIXED_BBOX 0 0 1200 600
+<< end >>
