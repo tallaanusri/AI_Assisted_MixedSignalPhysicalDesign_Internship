@@ -1,6 +1,7 @@
 # Task 4 – Week 5: AI-Assisted Analog MUX Physical Design (SKY130)
 
-=======
+---
+
 ## Project Overview
 
 This repository documents the complete implementation of **Task 4 – Week 5** of the AI-Assisted Mixed-Signal Physical Design Internship.
@@ -144,9 +145,8 @@ Although the layout is DRC-clean, layout extraction revealed that several signal
 * SKY130A PDK
 * Docker
 * GitHub
-* AI-assisted layout generation (Codex)
+* AI-assisted layout generation (Codex,google AI PRo)
 
 ---
 
 This repository captures the complete design workflow, verification process, debugging methodology, generated artifacts, and ongoing integration of an AI-assisted analog multiplexer within the SKY130 open-source physical design flow.
->>>>>>> 6260b55 (Add Task 4 documentation, AI layout artifacts, and macro views)
