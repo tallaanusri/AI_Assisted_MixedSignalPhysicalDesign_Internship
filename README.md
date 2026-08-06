@@ -749,11 +749,7 @@ AI can accelerate the design process, but engineering judgment ensures its corre
 
 "The future belongs to engineers who know not only how to use AI, but also how to question, verify, and improve its outputs."
 
----
-# 📹 Demonstration  Video 
 
-
-https://github.com/user-attachments/assets/9083e18e-e4a6-40b3-92d1-6bbaf18ae8d4
 
 
 
