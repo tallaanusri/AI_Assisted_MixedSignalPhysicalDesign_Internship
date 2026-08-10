@@ -1,7 +1,7 @@
 
 # Demonstration Video
 
-A complete screen-recorded demonstration of this project has been prepared as part of the internship submission.
+A complete screen-recorded demonstration of the task2 has been prepared as part of the internship submission.
 
 **Video Duration:** Less than 20 minutes
 
