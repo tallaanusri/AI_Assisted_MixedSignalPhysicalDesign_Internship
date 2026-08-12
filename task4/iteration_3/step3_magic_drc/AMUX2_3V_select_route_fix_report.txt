@@ -1,0 +1,72 @@
+AMUX2_3V select / sel_b route fix report
+==========================================
+
+Target layout:
+  /openlane/task4_drc_work/AMUX2_3V_magic83_compatible.mag
+
+Environment:
+  Magic 8.3 revision 413
+  /root/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech
+
+Backup:
+  /openlane/task4_drc_work/AMUX2_3V_magic83_compatible_pre_sel_route_fix.mag
+
+Original connectivity problem:
+  select and sel_b were physically shorted.  Extraction showed the inverter
+  as `select select VSS VSS` and `select select VDD VDD`.
+
+Short location and cause:
+  The former Metal1 select drops at x=490..507 and x=790..807 crossed the
+  Metal1 sel_b route at y=265..295.  An initial Via1 attempted at
+  x=488..507, y=265..295 also touched the x=490..507 select drop, preserving
+  the short.  That Via1 was removed from the final routing.
+
+Geometry/routing modification:
+  - Replaced the continuous Metal1 sel_b track with a left Metal1 segment
+    from x=190..460 at y=265..295, feeding TG0 NMOS.
+  - Added a Via1 at x=440..460, y=265..295 and a continuous Metal2 sel_b
+    bridge x=440..850, y=265..295.  This crosses both select Metal1 drops
+    without a Via1 at either crossing.
+  - Added a Via1 at x=488..507, y=395..410 and Metal2 segment
+    x=488..507, y=280..410 to connect the TG1 PMOS gate to sel_b.
+  - Added a Via1 at x=830..850, y=265..295 to reconnect the Metal2 sel_b
+    bridge to the inverter output Metal1 drain strap.
+  - Retained the select Metal1 routes to the TG0 PMOS, TG1 NMOS, and both
+    inverter gates.  I1 Metal1/Metal2/Via2/Metal3 routing and output routing
+    remain as previously repaired.
+
+Layers used:
+  Metal1, Via1, and Metal2 for the select/sel_b crossover.  Metal3 remains
+  used only by the pre-existing I1 route.
+
+DRC result before route correction:
+  Total DRC errors found: 0
+
+DRC result after route correction:
+  Magic command sequence: `load AMUX2_3V_magic83_compatible`; `drc check`;
+  `drc count total`
+  Actual output: `Total DRC errors found: 0`
+
+Extraction result before:
+  X4 select select VSS VSS
+  X5 select select VDD VDD
+
+Extraction result after:
+  .subckt AMUX2_3V_magic83_compatible I0 I1 select out VDD VSS
+  X0 out a_188_220# I0 VSS sky130_fd_pr__nfet_01v8
+  X1 out select I0 VDD sky130_fd_pr__pfet_01v8
+  X2 out select I1 VSS sky130_fd_pr__nfet_01v8
+  X3 out a_188_220# I1 VDD sky130_fd_pr__pfet_01v8
+  X4 a_188_220# select VSS VSS sky130_fd_pr__nfet_01v8
+  X5 a_188_220# select VDD VDD sky130_fd_pr__pfet_01v8
+
+`a_188_220#` is the unlabelled extracted internal sel_b node.  It is distinct
+from `select` and connects exactly to TG0 NMOS gate, TG1 PMOS gate, and both
+inverter drain terminals.  This extraction matches the required six-device
+MUX topology and select polarity.
+
+Final external port order:
+  I0 I1 select out VDD VSS
+
+No DRC rule was disabled, suppressed, or modified.  The schematic/netlist
+was not changed.  No remaining warnings from the DRC/extraction run.

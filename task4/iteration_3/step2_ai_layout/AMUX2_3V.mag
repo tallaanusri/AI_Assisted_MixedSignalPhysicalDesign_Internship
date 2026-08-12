@@ -1,0 +1,202 @@
+magic
+tech sky130A
+timestamp 1786431000
+<< nwell >>
+rect 0 330 1200 600
+<< ndiff >>
+# TG0 NMOS, W=0.50um (source=I0, drain=out)
+rect 140 160 255 210
+# TG1 NMOS, W=0.50um (source=I1, drain=out)
+rect 440 160 555 210
+# inverter NMOS, W=0.50um (source=VSS, drain=sel_b)
+rect 740 160 855 210
+<< pdiff >>
+# TG0 PMOS, W=1.00um (source=I0, drain=out)
+rect 140 420 255 520
+# TG1 PMOS, W=1.00um (source=I1, drain=out)
+rect 440 420 555 520
+# inverter PMOS, W=1.00um (source=VDD, drain=sel_b)
+rect 740 420 855 520
+<< nmos >>
+rect 190 160 205 210
+rect 490 160 505 210
+rect 790 160 805 210
+<< pmos >>
+rect 190 420 205 520
+rect 490 420 505 520
+rect 790 420 805 520
+<< poly >>
+# Independent gate stubs; their metal connections define select and sel_b.
+rect 190 135 205 235
+rect 490 135 505 235
+rect 790 135 805 235
+rect 190 395 205 545
+rect 490 395 505 545
+rect 790 395 805 545
+<< polycont >>
+rect 188 220 207 235
+rect 488 220 507 235
+rect 788 220 807 235
+rect 188 395 207 410
+rect 488 395 507 410
+rect 788 395 807 410
+<< ndiffc >>
+rect 150 165 180 205
+rect 215 165 245 205
+rect 450 165 480 205
+rect 515 165 545 205
+rect 750 165 780 205
+rect 815 165 845 205
+<< pdiffc >>
+rect 150 440 180 500
+rect 215 440 245 500
+rect 450 440 480 500
+rect 515 440 545 500
+rect 750 440 780 500
+rect 815 440 845 500
+<< psubdiff >>
+rect 1030 70 1080 120
+<< psubdiffcont >>
+rect 1040 80 1070 110
+<< nsubdiff >>
+rect 1030 480 1080 530
+<< nsubdiffcont >>
+rect 1040 490 1070 520
+<< locali >>
+# diffusion and gate landing pads
+rect 145 160 185 210
+rect 210 160 250 210
+rect 445 160 485 210
+rect 510 160 550 210
+rect 745 160 785 210
+rect 810 160 850 210
+rect 145 430 185 510
+rect 210 430 250 510
+rect 445 430 485 510
+rect 510 430 550 510
+rect 745 430 785 510
+rect 810 430 850 510
+rect 185 215 210 240
+rect 485 215 510 240
+rect 785 215 810 240
+rect 185 390 210 415
+rect 485 390 510 415
+rect 785 390 810 415
+rect 1035 75 1075 115
+rect 1035 485 1075 525
+<< viali >>
+# Local-interconnect to metal1 contacts
+rect 150 165 180 205
+rect 215 165 245 205
+rect 450 165 480 205
+rect 515 165 545 205
+rect 750 165 780 205
+rect 815 165 845 205
+rect 150 440 180 500
+rect 215 440 245 500
+rect 450 440 480 500
+rect 515 440 545 500
+rect 750 440 780 500
+rect 815 440 845 500
+rect 188 220 207 235
+rect 488 220 507 235
+rect 788 220 807 235
+rect 188 395 207 410
+rect 488 395 507 410
+rect 788 395 807 410
+rect 1040 80 1070 110
+rect 1040 490 1070 520
+<< metal1 >>
+# Robust horizontal supply rails.
+rect 0 0 1200 35
+rect 0 565 1200 600
+# I0 branches (TG0 source terminals)
+rect 45 165 180 205
+rect 45 440 180 500
+rect 45 165 75 500
+# I1 Metal1 terminal pads (TG1 source terminals); the long route is on Metal2.
+rect 450 165 480 205
+rect 450 440 480 500
+# out local branches, promoted to metal2 below
+rect 215 165 245 205
+rect 515 165 545 205
+rect 215 440 245 500
+rect 515 440 545 500
+rect 230 165 260 205
+rect 530 165 560 205
+rect 230 440 260 500
+rect 530 440 560 500
+# select: TG0 PMOS, TG1 NMOS, and both inverter gates
+rect 190 315 805 345
+rect 190 315 207 415
+rect 490 220 507 345
+rect 790 220 807 345
+# Repair 1: extend select to the inverter PMOS poly-contact landing.
+rect 790 315 807 415
+# sel_b: TG0 NMOS, TG1 PMOS, inverter drains
+rect 190 265 845 295
+rect 190 220 207 295
+rect 490 395 507 415
+rect 490 280 507 415
+rect 815 165 845 500
+# inverter sources and explicit well/substrate ties
+rect 750 0 780 205
+rect 750 440 780 600
+rect 1035 0 1075 110
+rect 1035 490 1075 600
+<< m2contact >>
+rect 230 165 260 205
+rect 530 165 560 205
+rect 230 440 260 500
+rect 530 440 560 500
+rect 450 165 480 205
+rect 450 440 480 500
+<< metal2 >>
+# Dedicated output spine and edge-accessible output pin.
+rect 230 165 260 205
+rect 530 165 560 205
+rect 230 440 260 500
+rect 530 440 560 500
+rect 245 170 330 200
+rect 245 455 330 485
+rect 300 170 330 555
+# Repair 3: detoured Metal2 branches join the TG1 drains to out without
+# touching the I1 Via2 landing pads at x=450..480.
+rect 530 170 560 260
+rect 300 230 560 260
+rect 530 455 560 540
+rect 300 510 560 540
+# I1 Metal2 landing pads only; I1 crosses to Metal3 before the output route.
+rect 450 165 480 205
+rect 450 440 480 500
+rect 1130 170 1160 500
+<< m3contact >>
+# Repair 2: Via2 transitions isolate the I1 backbone from Metal2 output routing.
+rect 450 165 480 205
+rect 450 440 480 500
+rect 1130 300 1160 330
+<< metal3 >>
+# I1 backbone: both TG1 source terminals to the existing right-side I1 pin.
+rect 450 170 480 200
+rect 450 455 480 485
+rect 465 170 1145 200
+rect 465 455 1145 485
+rect 1115 170 1145 485
+<< labels >>
+flabel metal1 s 60 300 60 300 0 FreeSans 80 0 0 0 I0
+port 1 nsew signal input
+flabel metal2 s 1145 300 1145 300 0 FreeSans 80 0 0 0 I1
+port 2 nsew signal input
+flabel metal1 s 700 330 700 330 0 FreeSans 80 0 0 0 select
+port 3 nsew signal input
+flabel metal2 s 315 535 315 535 0 FreeSans 80 0 0 0 out
+port 4 nsew signal output
+flabel metal1 s 600 582 600 582 0 FreeSans 80 0 0 0 VDD
+port 5 nsew power bidirectional
+flabel metal1 s 600 18 600 18 0 FreeSans 80 0 0 0 VSS
+port 6 nsew ground bidirectional
+<< properties >>
+string LEFclass CORE
+string FIXED_BBOX 0 0 1200 600
+string LEFsite unithddbl LEForigin 0 0
+<< end >>

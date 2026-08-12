@@ -1,0 +1,62 @@
+*=============================================================
+* Task 4 - Fresh AMUX2_3V Analog 2:1 MUX
+*
+* Architecture:
+*   - Two CMOS transmission gates
+*   - One CMOS select inverter
+*   - SKY130A 1.8-V devices
+*
+* Functional truth table:
+*   select=0 : I0 -> out
+*   select=1 : I1 -> out
+*
+* External logical pins:
+*   I0 I1 select out
+*
+* Physical/electrical pins:
+*   I0 I1 select out VDD VSS
+*=============================================================
+
+
+.subckt AMUX2_3V I0 I1 select out VDD VSS
+
+*-------------------------------------------------------------
+* Select inverter
+* select -> sel_b
+*-------------------------------------------------------------
+
+XINV_P sel_b select VDD VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1.00
+
+XINV_N sel_b select VSS VSS sky130_fd_pr__nfet_01v8 L=0.15 W=0.50
+
+*-------------------------------------------------------------
+* Transmission Gate 0
+*
+* Enabled when select = 0
+*
+* PMOS gate = sel_b
+* NMOS gate = select
+*-------------------------------------------------------------
+
+XTG0_P out select I0 VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1.00
+
+XTG0_N out sel_b I0 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=0.50
+
+*-------------------------------------------------------------
+* Transmission Gate 1
+*
+* Enabled when select = 1
+*
+* PMOS gate = select
+* NMOS gate = sel_b
+*-------------------------------------------------------------
+
+XTG1_P out sel_b I1 VDD sky130_fd_pr__pfet_01v8 L=0.15 W=1.00
+
+XTG1_N out select I1 VSS sky130_fd_pr__nfet_01v8 L=0.15 W=0.50
+
+.ends AMUX2_3V
+
+*=============================================================
+* End of canonical Task 4 transistor-level MUX
+*=============================================================

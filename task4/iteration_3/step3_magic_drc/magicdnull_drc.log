@@ -1,0 +1,244 @@
+
+Magic 8.3 revision 105 - Compiled on Mon, 06 Dec 2021 22:32:27 +0200.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using TrueColor, VisualID 0x23 depth 24
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 19: section version:
+	Error:  Magic version 8.3.411 is required by this techfile, but this version of magic is 8.3.105.
+Input style sky130(): scaleFactor=2, multiplier=2
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5023: section extract:
+	Illegal keyword.  Legal keywords are:
+	 areacap contact cscale defaultareacap defaultoverlap defaultperimeter defaultsideoverlap defaultsidewall device fet fetresist height antenna model tiedown lambda overlap perimc planeorder noplaneordering resist rscale sidehalo sideoverlap sidewall step style substrate units variants
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5303: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5319: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5340: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5368: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5401: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5438: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5514: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5521: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5537: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5558: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5586: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5619: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5656: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5732: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5739: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5755: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5776: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5804: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5837: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5874: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5941: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5948: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5974: section extract:
+	Unrecognized layer (type) name "a1>0.99"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5974: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5976: section extract:
+	Unrecognized layer (type) name "a1>1.99"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5976: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5979: section extract:
+	Unrecognized layer (type) name "a1>0.45"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5981: section extract:
+	Unrecognized layer (type) name "a1>11.55"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5984: section extract:
+	Unrecognized layer (type) name "a1>0.99"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5984: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6034: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6036: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6038: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6040: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6042: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6046: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6048: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6050: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6052: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6054: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+The following sections of /home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech contained errors:
+    version
+Error loading technology "/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech"
+Processing system .magicrc file
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 19: section version:
+	Error:  Magic version 8.3.411 is required by this techfile, but this version of magic is 8.3.105.
+Input style sky130(): scaleFactor=2, multiplier=2
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5023: section extract:
+	Illegal keyword.  Legal keywords are:
+	 areacap contact cscale defaultareacap defaultoverlap defaultperimeter defaultsideoverlap defaultsidewall device fet fetresist height antenna model tiedown lambda overlap perimc planeorder noplaneordering resist rscale sidehalo sideoverlap sidewall step style substrate units variants
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5303: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5319: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5340: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5368: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5401: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5438: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5514: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5521: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5537: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5558: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5586: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5619: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5656: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5732: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5739: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5755: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5776: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5804: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5837: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5874: section extract:
+	Malformed line for keyword defaultsidewall.  Correct usage:
+	defaultsidewall types plane capacitance
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5941: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5948: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5974: section extract:
+	Unrecognized layer (type) name "a1>0.99"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5974: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5976: section extract:
+	Unrecognized layer (type) name "a1>1.99"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5976: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5979: section extract:
+	Unrecognized layer (type) name "a1>0.45"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5981: section extract:
+	Unrecognized layer (type) name "a1>11.55"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5984: section extract:
+	Unrecognized layer (type) name "a1>0.99"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 5984: section extract:
+	Ambiguous layer (type) name "error"
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6034: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6036: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6038: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6040: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6042: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6046: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6048: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6050: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6052: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech: line 6054: section extract:
+	Malformed line for keyword device.  Correct usage:
+	device device dev-type types options...
+The following sections of /home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech contained errors:
+    version
+Error loading technology "/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech"
