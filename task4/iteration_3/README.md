@@ -467,21 +467,3 @@ The remaining LVS mismatch is explicitly documented with the identified physical
 This provides a transparent engineering record of both the successful stages and the remaining verification challenge.
 
 ```
-
----
-
-## Important
-
-For now, **do not edit anything else on GitHub**.
-
-After you paste both READMEs:
-
-1. Click **Commit changes** for `task4/README.md`.
-2. Click **Commit changes** for `task4/iteration_3/README.md`.
-
-Then come back here and tell me:
-
-> **Both READMEs updated**
-
-Then we'll do the next part: **taking the actual screenshots from Ubuntu one-by-one**.
-```
