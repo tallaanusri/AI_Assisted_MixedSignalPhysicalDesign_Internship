@@ -465,5 +465,3 @@ The project successfully completed the major physical-design stages from transis
 The remaining LVS mismatch is explicitly documented with the identified physical causes.
 
 This provides a transparent engineering record of both the successful stages and the remaining verification challenge.
-
-```
