@@ -1,0 +1,43 @@
+*=============================================================
+* Task 4 - AMUX2_3V
+* Pre-layout simulation
+* Select = 1 : I1 should propagate to OUT
+*=============================================================
+
+.include "AMUX2_3V.spice"
+
+.param VDDVAL=1.8
+
+VDD VDD 0 {VDDVAL}
+VSS VSS 0 0
+
+* Select permanently HIGH
+VSEL select 0 1.8
+
+* I0 held at opposite value
+VI0 I0 0 0
+
+* I1 toggles
+VI1 I1 0 PULSE(0 1.8 1n 20p 20p 5n 10n)
+
+* Output load
+CLOAD out 0 20f
+
+* Instantiate MUX
+XMUX I0 I1 select out VDD VSS AMUX2_3V
+
+* SKY130 typical corner
+.lib "/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+.tran 1p 20n
+
+.control
+run
+
+write results/select1.raw all
+
+
+
+.endc
+
+.end
