@@ -2,11 +2,9 @@
 
 ## Project Overview
 
-This repository documents the implementation of **Task 4 – Week 5** of the AI-Assisted Mixed-Signal Physical Design Internship.
+This repository documents **Task 4 – Week 5** of the AI-Assisted Mixed-Signal Physical Design Internship: the design and integration of a new **double-height 2:1 analog multiplexer (AMUX2_3V)** intended to replace the placeholder MUX used by the reference design.
 
-The objective is to design and integrate a new **double-height 2:1 analog multiplexer (AMUX2_3V)** using the open-source **SKY130A PDK**.
-
-The work follows a custom analog IC physical-design flow:
+The work covers transistor-level design, ngspice verification, AI-assisted physical-layout generation, Magic DRC/extraction, LVS analysis and debugging, reusable macro generation, and OpenLane integration/PNR investigation.
 
 ```text
 Transistor-Level Design
@@ -15,424 +13,364 @@ Transistor-Level Design
 Pre-Layout ngspice Verification
         │
         ▼
-AI-Assisted Layout Generation
+AI-Assisted Fresh Layout Generation
         │
         ▼
-Magic Layout Development
-        │
-        ▼
-Magic DRC
+Magic Layout / DRC
         │
         ▼
 Layout Extraction
         │
         ▼
-LVS Verification and Debugging
-        │
-        ▼
-Post-Layout Simulation
+Netgen LVS + Debugging
         │
         ▼
 Macro Views
         │
         ▼
-OpenLane Integration
+OpenLane Integration / PNR
 ```
 
-The repository is organized into **two iterations** to clearly distinguish the initial implementation from the subsequent AI-assisted layout refinement and verification work.
+The repository intentionally preserves multiple iterations so that the AI-assisted design process, successful stages, failed attempts, and debugging decisions remain reproducible and auditable.
 
 ---
 
 # Design Objective
 
-The target circuit is a **2:1 analog multiplexer** with:
+The target macro is a transistor-level 2:1 analog MUX with:
 
-* Analog inputs: `I0`, `I1`
-* Select input: `select`
-* Output: `out`
-* Supply: `VDD`
-* Ground: `VSS`
-* SKY130 transistor-level implementation
-* Double-height physical macro suitable for integration into a digital/analog mixed-signal flow
+- Analog inputs: `I0`, `I1`
+- Select: `select`
+- Output: `out`
+- Supply: `VDD`
+- Ground: `VSS`
+- SKY130A transistor implementation
+- Double-height physical macro
+- PNR-accessible external pins
 
-The intended functionality is:
+Required functionality:
 
 ```text
 select = 0  →  I0 → out
 select = 1  →  I1 → out
 ```
 
-The circuit was first verified at the transistor level using ngspice before proceeding to physical layout.
+The schematic was verified before physical implementation.
 
 ---
 
-# Iteration 1 – Initial Physical Design
+# Iteration History
 
-The first iteration represents the initial schematic-to-layout implementation and verification attempt.
+## Iteration 1
+
+`iteration_1/` records the initial transistor-level design, first AI-assisted layout, Magic extraction and initial LVS attempt. It established the baseline flow and exposed physical-connectivity issues.
+
+## Iteration 2
+
+`iteration_2/` records further AI-assisted layout generation, alternative layouts, Magic implementation, extraction, post-layout artifacts and reusable macro views.
+
+## Iteration 3 – Current Final Debugging Iteration
+
+`iteration_3/` records the latest clean/restarted implementation and OpenLane integration work. This is the primary iteration for the final Week-5 documentation.
+
+Current structure:
 
 ```text
-iteration_1/
-│
+iteration_3/
+├── README.md
 ├── step1_schematic/
-│   ├── AMUX2_3V_NEW.spice
-│   ├── test_AMUX2_3V.spice
-│   └── README.md
-│
 ├── step2_ai_layout/
-│   ├── AMUX2_3V_AI.mag
-│   └── README.md
-│
-├── step3_drc/
-│   ├── AMUX2_3V_AI.mag
-│   └── README.md
-│
-├── step4_extraction/
-│   ├── AMUX2_3V_AI.ext
-│   ├── AMUX2_3V_AI.spice
-│   ├── extraction_warnings.txt
-│   └── README.md
-│
-└── step5_lvs/
-    ├── AMUX2_3V_AI.spice
-    ├── AMUX2_3V_SUBCKT.spice
-    ├── lvs_summary.txt
-    └── README.md
+├── step3_magic_drc/
+└── step4_extraction/
 ```
 
-### Iteration 1 Results
-
-The initial implementation successfully established the basic physical-design flow:
-
-* Transistor-level SPICE netlist created.
-* Pre-layout ngspice testbench created.
-* Initial AI-assisted Magic layout generated.
-* Magic DRC performed.
-* Layout extraction performed.
-* Extracted SPICE generated.
-* Netgen LVS comparison performed.
-* LVS mismatches were identified and documented.
-
-The LVS results showed that the initial physical implementation was **not electrically equivalent to the intended schematic**, motivating a second layout-generation and debugging iteration.
+The latest iteration focuses on a fresh double-height layout, physical routing correction, extraction, LVS investigation and final OpenLane integration/debugging.
 
 ---
 
-# Iteration 2 – AI-Assisted Layout Refinement
+# Transistor-Level and Pre-Layout Verification
 
-The second iteration contains the refined AI-assisted workflow, layout alternatives, Magic implementation, extraction, final netlist, post-layout simulation artifacts, and reusable macro views.
+The transistor-level MUX was simulated using SKY130A models and ngspice under the nominal verification conditions used during development:
 
-```text
-iteration_2/
-│
-├── step1_ai_assisted_design/
-│   ├── inputs/
-│   ├── prompts/
-│   └── README.md
-│
-├── step2_layout_generation/
-│   ├── AI_layout_prompt.md
-│   ├── AMUX2_3V_AI.mag
-│   ├── layout_spec.md
-│   └── README.md
-│
-├── step3_layout_iterations/
-│   ├── AMUX2_3V_attempt1.mag
-│   ├── AMUX2_3V_attempt2_gemini.mag
-│   └── design_iteration_notes.md
-│
-├── step4_magic_layout/
-│   ├── AMUX2_3V_AI.mag
-│   ├── AMUX2_3V_AI_old.mag
-│   ├── AMUX2_3V_attempt2_gemini.mag
-│   ├── AMUX2_3V_gemini_test.mag
-│   ├── AMUX2_3V_AI.ext
-│   ├── AMUX2_3V_AI.spice
-│   └── README.md
-│
-├── step6_extraction/
-│   ├── AMUX2_3V_AI.ext
-│   ├── AMUX2_3V_AI.spice
-│   └── README.md
-│
-├── step7_final_netlist/
-│   ├── AMUX2_3V_NEW.spice
-│   └── README.md
-│
-├── step8_post_layout_simulation/
-│   ├── AMUX2_3V_AI.spice
-│   ├── AMUX2_3V_SUBCKT.spice
-│   ├── test_AMUX2_3V.spice
-│   └── README.md
-│
-└── step9_macro_views/
-    ├── AMUX2_3V_AI.mag
-    ├── AMUX2_3V_AI.gds
-    ├── AMUX2_3V_AI.lef
-    ├── AMUX2_3V_AI.spice
-    └── README.md
-```
+- SKY130A TT corner
+- 27 °C
+- `VDD = 1.8 V`
+- 20 fF output load
+
+Measured pre-layout results:
+
+| Metric | Select = 0 | Select = 1 |
+|---|---:|---:|
+| Function | `I0 → out` | `I1 → out` |
+| Rise delay | 47.36 ps | 50.96 ps |
+| Fall delay | 51.46 ps | 48.37 ps |
+| Average VDD current | 1.560 µA | 0.891 µA |
+
+An important early debugging result was the identification of SKY130 W/L parameter units in the primitive wrappers. The wrappers expect W/L values in micrometre units; incorrect scaling initially caused model-selection problems in ngspice.
 
 ---
 
-# AI-Assisted Design Workflow
+# AI-Assisted Layout Generation
 
-The second iteration explicitly documents the AI-assisted methodology used to generate and refine the physical layout.
+The new layout was generated as a fresh physical implementation using an AI-assisted workflow rather than copying the existing MUX layout.
 
-The AI workflow used:
+AI inputs included:
 
-1. Transistor-level SPICE netlist as circuit input.
-2. SKY130 Magic technology information.
-3. Reference/sample Magic layout.
-4. Explicit pin-order and connectivity requirements.
-5. Double-height layout requirements.
-6. Power and ground rail requirements.
-7. Iterative layout-generation prompts.
-8. Manual inspection and verification of generated layouts.
-9. Magic DRC and extraction.
-10. LVS comparison and debugging.
+1. Transistor-level SPICE netlist.
+2. SKY130A Magic technology information.
+3. A sample/reference `.mag` file for technology/layout context.
+4. Explicit pin names and pin-order requirements.
+5. Double-height cell requirements.
+6. Power/well/substrate requirements.
+7. PNR-accessible pin requirements.
+8. Iterative correction prompts based on DRC, extraction and LVS observations.
 
-The prompts and supporting files are preserved under:
-
-```text
-iteration_2/step1_ai_assisted_design/
-```
-
-and:
-
-```text
-iteration_2/step2_layout_generation/
-```
-
-This makes the AI-assisted design process reproducible rather than storing only the final layout artifact.
+The generated layout was targeted as a **12.0 µm × 6.0 µm double-height cell** in the development flow.
 
 ---
 
-# Layout Iterations
+# Magic DRC and Physical Debugging
 
-Multiple physical-layout alternatives were generated during the second iteration.
+Magic was used to inspect and verify the generated layout. The latest iteration corrected the physical routing between the `select` and internal `sel_b` control networks.
 
-They are preserved under:
+The final DRC-oriented layout artifact in Iteration 3 is:
 
 ```text
-iteration_2/step3_layout_iterations/
+iteration_3/step3_magic_drc/AMUX2_3V_magic83_DRC0_select_fixed.mag
 ```
 
-including:
+The corrected extracted topology contains:
 
-* `AMUX2_3V_attempt1.mag`
-* `AMUX2_3V_attempt2_gemini.mag`
-* `design_iteration_notes.md`
+- 3 NFETs
+- 3 PFETs
+- distinct `select` and internal `sel_b` networks
+- transmission-gate polarity corresponding to the intended MUX structure
+- external pin order: `I0 I1 select out VDD VSS`
 
-This folder records the evolution of the layout rather than hiding unsuccessful intermediate attempts.
+The Magic physical-verification stage was therefore successfully completed for the generated macro revision used for subsequent extraction/integration work.
 
 ---
 
-# Verification Status
+# Extraction
 
-## Completed
+Magic extraction was performed to convert the physical geometry into an electrical representation.
 
-* Transistor-level AMUX2_3V design created.
-* Pre-layout ngspice verification performed.
-* AI-assisted layout-generation workflow established.
-* Multiple Magic layout iterations generated.
-* Magic DRC performed.
-* Layout extraction performed.
-* Extracted SPICE generated.
-* Netgen LVS analysis performed.
-* LVS mismatch/root causes investigated.
-* Post-layout simulation artifacts prepared.
-* GDS and LEF macro views generated.
-* Reusable Magic/SPICE macro artifacts generated.
+The latest extracted SPICE artifact is preserved under:
 
-## LVS Status
+```text
+iteration_3/step4_extraction/AMUX2_3V_extracted.spice
+```
 
-The current layout reached the stage where LVS could be executed, but the extracted physical connectivity does **not yet fully match the canonical transistor-level schematic**.
-
-The main issues identified during debugging include:
-
-* Layout and schematic pin-order differences.
-* Incorrect correspondence between the select signal and the two analog inputs in the physical implementation.
-* Extracted layout connectivity showing unintended electrical shorts/merges in the earlier AI-generated layout.
-
-Therefore, the current repository should be understood as documenting an **AI-assisted iterative physical-design and debugging workflow**, rather than claiming a final LVS-clean macro.
+Extraction was essential for comparing the actual physical connectivity against the canonical transistor-level netlist.
 
 ---
 
-# Macro Views
+# LVS Verification and Debugging
 
-The second iteration contains generated macro artifacts under:
+## Final Status
+
+**Netgen LVS did not reach a clean zero-error match.** The failure is intentionally documented rather than hidden or bypassed.
+
+The debugging process identified several concrete causes.
+
+### 1. External pin-order mismatch
+
+The canonical schematic interface was:
 
 ```text
-iteration_2/step9_macro_views/
+I0 I1 select out VDD VSS
 ```
 
-Available views include:
+An earlier extracted layout revision produced a different subcircuit ordering, for example:
 
 ```text
-AMUX2_3V_AI.mag
-AMUX2_3V_AI.gds
-AMUX2_3V_AI.lef
-AMUX2_3V_AI.spice
+select I0 out I1 VSS VDD
 ```
 
-These artifacts represent the physical macro generated from the Magic layout and are intended for subsequent integration and verification.
+This caused top-level pin/net correspondence errors during Netgen comparison.
+
+### 2. Reversed MUX selection connectivity
+
+The intended function is:
+
+```text
+select = 0 → I0 → out
+select = 1 → I1 → out
+```
+
+An earlier AI-generated physical implementation was found to implement the opposite correspondence:
+
+```text
+select = 0 → I1 → out
+select = 1 → I0 → out
+```
+
+This was identified as a genuine physical-connectivity/functionality problem, not merely a naming difference.
+
+### 3. Unintended physical shorts in an earlier generated layout
+
+Magic extraction reported electrical merges including:
+
+```text
+VSS ↔ select
+VSS ↔ I1
+VSS ↔ I0
+VDD ↔ out
+```
+
+These extraction warnings demonstrated that the physical geometry did not represent the intended six-terminal electrical network in that revision.
+
+### 4. Extracted topology differed from the canonical schematic
+
+Because the physical layout contained unintended connectivity and pin-order differences, the extracted SPICE representation could not be expected to match the canonical transistor-level reference. The debugging process therefore focused on the physical implementation rather than modifying the schematic simply to force LVS.
+
+### 5. OpenLane CONB/tie-cell investigation
+
+During the final OpenLane integration investigation, the SKY130A standard-cell LEF was checked for the `sky130_fd_sc_hd__conb_1` macro.
+
+The PDK was verified to contain:
+
+```text
+/root/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef
+```
+
+and this LEF contains:
+
+```text
+MACRO sky130_fd_sc_hd__conb_1
+```
+
+Therefore, the investigation was narrowed to actual DEF instance connectivity and integration behavior rather than assuming that the CONB cell was missing from the PDK.
+
+### LVS conclusion
+
+The LVS failure is treated as a real physical-equivalence issue. No schematic-side changes were used solely to manufacture an LVS pass.
 
 ---
 
-# Pre-Layout Simulation
+# OpenLane Integration and PNR Investigation
 
-The transistor-level design was verified using ngspice before physical implementation.
+The new macro was integrated into the OpenLane-based mixed-signal/digital top-level flow. A clean final-run investigation was performed using the current Task 4 iteration-3 environment.
 
-The simulations evaluated both select states:
-
-```text
-select = 0
-I0 → out
-
-select = 1
-I1 → out
-```
-
-The pre-layout simulation was performed using SKY130 transistor models under the selected nominal operating conditions.
-
-The corresponding netlist and testbench are available under:
+Latest final DEF under investigation:
 
 ```text
-iteration_1/step1_schematic/
+/openlane/designs/task4_iteration3/runs/RUN_2026.08.13_05.44.08/results/final/def/design_mux.def
 ```
 
-and the refined design artifacts are preserved under:
+The final DEF was inspected for standard-cell constant/tie-cell connectivity, while the SKY130A LEF was independently checked to confirm that the required `conb_1` macro exists.
 
-```text
-iteration_2/step7_final_netlist/
-```
+The PNR/integration evidence is preserved through the Iteration 3 workspace and the command/log records used during debugging.
 
 ---
 
-# Tools and Technologies
+# Verification Summary
 
-The project uses:
-
-* **SKY130A PDK**
-* **Magic VLSI**
-* **Netgen LVS**
-* **ngspice**
-* **OpenLane**
-* **Docker**
-* **Git / GitHub**
-* **AI-assisted layout generation**
+| Stage | Status | Notes |
+|---|---|---|
+| Transistor-level MUX | ✅ Completed | SKY130A transistor-level implementation |
+| Pre-layout ngspice | ✅ Completed | Both select states verified |
+| AI-assisted fresh layout | ✅ Completed | Fresh double-height layout generated |
+| Physical routing correction | ✅ Completed | `select` / `sel_b` connectivity corrected |
+| Magic DRC | ✅ Completed | DRC-clean layout revision documented |
+| Magic extraction | ✅ Completed | Extracted SPICE generated |
+| LVS analysis | ⚠️ Completed with failure | Debugging performed; clean match not achieved |
+| LVS root-cause analysis | ✅ Completed/documented | Pin order, selection connectivity, physical shorts identified |
+| Macro artifacts | ✅ Generated | `.mag`, extracted SPICE and integration views preserved where available |
+| OpenLane integration | ✅ Performed | New macro integrated into PNR flow |
+| Final CONB investigation | ✅ Performed | SKY130A LEF and final DEF connectivity inspected |
+| Final clean LVS | ❌ Not achieved | Remaining limitation |
 
 ---
 
-# Repository Navigation
+# Important Project Integrity Note
 
-For evaluation or reproduction, the recommended order is:
+This repository does **not** claim that the final AMUX2_3V macro is LVS-clean. The purpose of preserving the LVS failure and its debugging evidence is to demonstrate the complete AI-assisted physical-design workflow and the ability to diagnose discrepancies between schematic intent, physical geometry, extraction and PNR integration.
 
-### Initial implementation
+The strongest confirmed results are the transistor-level simulation, fresh AI-assisted layout generation, physical routing correction, Magic DRC/extraction, macro generation and OpenLane integration/debugging. The remaining technical gap is a fully clean Netgen LVS match and the dependent final post-layout equivalence claim.
 
-```text
-iteration_1/
-```
+---
 
-This shows the original schematic, layout, DRC, extraction, and LVS attempt.
+# Evidence and Screenshot Plan
 
-### AI-assisted refinement
+Screenshots should be added under a dedicated evidence directory as they are captured. Recommended evidence includes:
 
 ```text
-iteration_2/step1_ai_assisted_design/
+evidence/
+├── 01_schematic_netlist.png
+├── 02_pre_layout_select0.png
+├── 03_pre_layout_select1.png
+├── 04_ai_layout_prompt.png
+├── 05_generated_mux_magic_layout.png
+├── 06_magic_drc_zero.png
+├── 07_extracted_spice.png
+├── 08_netgen_lvs_debug.png
+├── 09_openlane_config.png
+├── 10_openlane_placement.png
+├── 11_openlane_routing.png
+├── 12_final_def_conb.png
+├── 13_final_drc.png
+├── 14_final_lvs_debug.png
+├── 15_post_layout_select0.png
+├── 16_post_layout_select1.png
+└── 17_area_delay_comparison.png
 ```
 
-Review the AI inputs and prompts.
+Each screenshot should show enough terminal/tool context to make the result reproducible and auditable.
 
-### Layout generation
+---
+
+# Recommended Repository Navigation
+
+### Schematic and pre-layout verification
 
 ```text
-iteration_2/step2_layout_generation/
+iteration_3/step1_schematic/
 ```
 
-Review the layout specification and generated layout.
-
-### Layout alternatives
+### AI-assisted layout
 
 ```text
-iteration_2/step3_layout_iterations/
+iteration_3/step2_ai_layout/
 ```
 
-Review the different AI-generated layout attempts.
-
-### Magic implementation
+### Magic DRC and physical correction
 
 ```text
-iteration_2/step4_magic_layout/
+iteration_3/step3_magic_drc/
 ```
-
-Review the Magic layout and associated extraction artifacts.
 
 ### Extraction
 
 ```text
-iteration_2/step6_extraction/
+iteration_3/step4_extraction/
 ```
 
-Review the extracted `.ext` and SPICE representations.
-
-### Final circuit netlist
+### Earlier iterations
 
 ```text
-iteration_2/step7_final_netlist/
+iteration_1/
+iteration_2/
 ```
 
-Review the canonical transistor-level netlist used for comparison.
-
-### Post-layout simulation
-
-```text
-iteration_2/step8_post_layout_simulation/
-```
-
-Review the extracted subcircuit and simulation testbench.
-
-### Macro views
-
-```text
-iteration_2/step9_macro_views/
-```
-
-Review the generated `.mag`, `.gds`, `.lef`, and SPICE macro views.
+These preserve previous generated layouts, extraction results, LVS attempts and AI-assisted refinement history.
 
 ---
 
-# Overall Project Status
+# Tools
 
-| Area                             | Status                         |
-| -------------------------------- | ------------------------------ |
-| Transistor-level design          | ✅ Completed                    |
-| Pre-layout simulation            | ✅ Completed                    |
-| AI-assisted layout generation    | ✅ Completed                    |
-| Layout iterations                | ✅ Documented                   |
-| Magic layout                     | ✅ Generated                    |
-| Magic DRC                        | ✅ Performed                    |
-| Layout extraction                | ✅ Completed                    |
-| LVS analysis                     | ⚠️ Debugging/documented        |
-| Post-layout simulation artifacts | ✅ Prepared                     |
-| GDS generation                   | ✅ Completed                    |
-| LEF generation                   | ✅ Completed                    |
-| Macro packaging                  | ✅ Completed                    |
-| OpenLane integration             | 🔄 Subsequent integration work |
+- SKY130A PDK
+- Magic VLSI
+- Netgen LVS
+- ngspice
+- OpenLane
+- OpenROAD
+- Docker
+- Git / GitHub
+- AI-assisted layout-generation workflow
 
 ---
 
-# Purpose of the Two-Iteration Structure
+# Final Project Statement
 
-The repository intentionally preserves both design iterations.
-
-**Iteration 1** demonstrates the initial implementation and establishes the baseline physical-design flow.
-
-**Iteration 2** demonstrates the AI-assisted refinement process, including prompt development, multiple layout attempts, Magic implementation, extraction, LVS debugging, simulation preparation, and macro generation.
-
-Keeping both iterations makes the development process transparent and demonstrates how AI-generated physical design artifacts were progressively evaluated and refined.
-
----
-
-## Note
-
-Generated extraction and simulator log files may be excluded from Git when they are covered by the corresponding `.gitignore` rules. The repository therefore preserves the important reproducible design inputs, layouts, prompts, verification artifacts, and macro views without unnecessarily tracking transient tool-generated files.
+Task 4 demonstrates an end-to-end AI-assisted mixed-signal physical-design workflow for replacing a placeholder analog MUX with a newly generated double-height SKY130 macro. The project successfully established and exercised the schematic → simulation → AI layout → DRC → extraction → LVS → macro → OpenLane/PNR workflow. The remaining LVS mismatch is explicitly documented with its diagnosed physical causes, providing a transparent engineering record rather than an artificially forced verification result.
