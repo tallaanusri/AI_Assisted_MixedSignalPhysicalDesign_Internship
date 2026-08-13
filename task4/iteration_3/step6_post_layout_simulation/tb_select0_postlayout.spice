@@ -1,0 +1,39 @@
+*=============================================================
+* Task 4 - AMUX2_3V
+* POST-LAYOUT simulation using Magic-extracted SPICE
+* Select = 0 : I0 should propagate to OUT
+*=============================================================
+
+.include "../step4_extraction/AMUX2_3V_extracted.spice"
+
+.param VDDVAL=1.8
+
+VDD VDD 0 {VDDVAL}
+VSS VSS 0 0
+
+* Select permanently LOW
+VSEL select 0 0
+
+* I0 toggles
+VI0 I0 0 PULSE(0 1.8 1n 20p 20p 5n 10n)
+
+* I1 held HIGH
+VI1 I1 0 1.8
+
+* Output load
+CLOAD out 0 20f
+
+* Extracted layout DUT
+XMUX I0 I1 select out VDD VSS AMUX2_3V_magic83_DRC0_select_fixed
+
+* SKY130 typical corner
+.lib "/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+
+.tran 1p 20n
+
+.control
+run
+write results/select0_postlayout.raw all
+.endc
+
+.end

@@ -1,0 +1,7 @@
+.control
+  load results/select1_postlayout.raw
+  print v(i1) v(out)
+  meas tran trise TRIG v(i1) VAL=0.9 RISE=1 TARG v(out) VAL=0.9 RISE=1
+  meas tran tfall TRIG v(i1) VAL=0.9 FALL=1 TARG v(out) VAL=0.9 FALL=1
+  quit
+.endc

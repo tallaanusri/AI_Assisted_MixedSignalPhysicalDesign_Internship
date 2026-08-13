@@ -1,0 +1,32 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: *=============================================================
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                        1.8
+vss                                          0
+select                                       0
+i0                                           0
+i1                                         1.8
+out                                4.68687e-07
+xmux.sel_b                                 1.8
+vi1#branch                        -3.18674e-10
+vi0#branch                         3.23645e-10
+vsel#branch                                  0
+vss#branch                         3.72744e-12
+vdd#branch                        -8.69879e-12
+
+
+No. of Data Rows : 20032
+binary raw file "results/select0.raw"
+Note: Simulation executed from .control section 
