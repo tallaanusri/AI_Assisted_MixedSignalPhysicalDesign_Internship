@@ -26,7 +26,11 @@ CLOAD out 0 20f
 *-------------------------------------------------------------
 * SKY130 model
 *-------------------------------------------------------------
-.lib "/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+* SKY130 model library:
+* The automated PVT script resolves sky130.lib.spice from PDK_ROOT.
+* Do not hard-code a machine-specific PDK path in this template.
+* Example resolved form:
+* .lib "$PDK_ROOT/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
 
 .temp {TEMPVAL}
 

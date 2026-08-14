@@ -1,0 +1,33 @@
+============================================================
+Task 5 - AMUX2_3V Physical Sign-Off
+============================================================
+Repository : /home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB
+
+===== DRC =====
+PASS: Magic DRC log exists
+PASS: Magic DRC reports zero violations
+
+===== EXTRACTION =====
+PASS: Extracted SPICE exists
+PASS: Extracted subcircuit has six expected pins
+
+===== LVS =====
+PASS: Netgen LVS report exists
+PASS: LVS netlists match uniquely
+PASS: LVS final result passes
+
+===== POST-LAYOUT SIMULATION =====
+PASS: Post-layout measurement report exists
+PASS: Post-layout LVS status is PASS
+
+===== OPENLANE MACRO VIEWS =====
+PASS: GDS view exists
+PASS: LEF view exists
+PASS: Liberty view exists
+PASS: Verilog view exists
+
+===== SUMMARY =====
+PASS checks : 13
+FAIL checks : 0
+
+FINAL PHYSICAL SIGN-OFF: PASS

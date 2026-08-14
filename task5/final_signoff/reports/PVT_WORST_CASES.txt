@@ -1,0 +1,50 @@
+TASK 5 - PVT WORST-CASE SUMMARY
+============================================================
+
+Total simulated cases : 54
+Passing cases         : 54
+
+Minimum VOH
+-----------
+Value       : 1.61962
+Condition   : FF / 1.62 V / 125 C / select=1 (I1)
+
+Maximum VOL
+-----------
+Value       : 6.6928e-08
+Condition   : TT / 1.98 V / 125 C / select=0 (I0)
+
+Maximum VOH error
+-----------------
+Value       : 0.000609
+Condition   : FF / 1.98 V / 125 C / select=1 (I1)
+
+Maximum VOL error
+-----------------
+Value       : 6.6928e-08
+Condition   : TT / 1.98 V / 125 C / select=0 (I0)
+
+Minimum VOH accuracy
+--------------------
+Value       : 99.969242
+Condition   : FF / 1.98 V / 125 C / select=1 (I1)
+
+Minimum VOL accuracy
+--------------------
+Value       : 99.999997
+Condition   : TT / 1.98 V / 125 C / select=0 (I0)
+
+Maximum propagation delay
+-------------------------
+Value       : 170.7
+Condition   : SS / 1.62 V / -40 C / select=1 (I1)
+
+Maximum rise time
+-----------------
+Value       : 439.538
+Condition   : SS / 1.62 V / -40 C / select=1 (I1)
+
+Maximum fall time
+-----------------
+Value       : 298.93
+Condition   : SS / 1.62 V / 125 C / select=0 (I0)

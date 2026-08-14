@@ -11,7 +11,7 @@ from pathlib import Path
 # AMUX2_3V double-height 2:1 analog MUX
 # =============================================================
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parent
 
 TB_DIR = ROOT / "testbenches"
 RESULT_DIR = ROOT / "results"
@@ -23,11 +23,43 @@ CSV_FILE = RESULT_DIR / "pvt_results.csv"
 
 NGSPICE = "ngspice"
 
-SKY130_LIB = (
-    "/home/anusri/.ciel/ciel/sky130/versions/"
-    "f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/"
-    "sky130A/libs.tech/ngspice/sky130.lib.spice"
-)
+# -------------------------------------------------------------
+# Portable SKY130 PDK discovery
+#
+# The script must run on another machine after the user sets
+# PDK_ROOT. Support both:
+#
+#   PDK_ROOT=/path/to/sky130
+#       -> /path/to/sky130/sky130A/libs.tech/ngspice/...
+#
+# and:
+#
+#   PDK_ROOT=/path/to/sky130A
+#       -> /path/to/sky130A/libs.tech/ngspice/...
+# -------------------------------------------------------------
+
+PDK_ROOT = os.environ.get("PDK_ROOT")
+
+if not PDK_ROOT:
+    raise EnvironmentError(
+        "PDK_ROOT is not set. Please export PDK_ROOT to the "
+        "installed SKY130 PDK root before running this script."
+    )
+
+PDK_ROOT = Path(PDK_ROOT).expanduser().resolve()
+
+candidate_libs = [
+    PDK_ROOT / "sky130A" / "libs.tech" / "ngspice" / "sky130.lib.spice",
+    PDK_ROOT / "libs.tech" / "ngspice" / "sky130.lib.spice",
+]
+
+SKY130_LIB = next((p for p in candidate_libs if p.exists()), None)
+
+if SKY130_LIB is None:
+    raise FileNotFoundError(
+        "Could not find sky130.lib.spice under PDK_ROOT. "
+        f"Checked: {candidate_libs}"
+    )
 
 CORNERS = ["tt", "ss", "ff"]
 VDDS = [1.62, 1.80, 1.98]
@@ -278,6 +310,35 @@ quit
                 if functionality != "PASS":
                     status = "FAIL"
 
+                # -------------------------------------------------
+                # Explicit output-voltage accuracy metrics
+                #
+                # Accuracy is reported relative to the applied VDD:
+                #
+                #   VOH accuracy (%) = VOH / VDD * 100
+                #   VOL accuracy (%) = (VDD - VOL) / VDD * 100
+                #
+                # Rail errors are also reported explicitly.
+                # -------------------------------------------------
+
+                voh_error_V = (
+                    vdd - voh if voh is not None else None
+                )
+
+                vol_error_V = (
+                    vol if vol is not None else None
+                )
+
+                voh_accuracy_percent = (
+                    (voh / vdd) * 100.0
+                    if voh is not None else None
+                )
+
+                vol_accuracy_percent = (
+                    ((vdd - vol) / vdd) * 100.0
+                    if vol is not None else None
+                )
+
                 rows.append({
                     "corner": corner.upper(),
                     "vdd_V": f"{vdd:.2f}",
@@ -289,6 +350,22 @@ quit
                     ),
                     "output_low_V": (
                         f"{vol:.6g}" if vol is not None else "NA"
+                    ),
+                    "voh_error_V": (
+                        f"{voh_error_V:.6g}"
+                        if voh_error_V is not None else "NA"
+                    ),
+                    "vol_error_V": (
+                        f"{vol_error_V:.6g}"
+                        if vol_error_V is not None else "NA"
+                    ),
+                    "voh_accuracy_percent": (
+                        f"{voh_accuracy_percent:.6f}"
+                        if voh_accuracy_percent is not None else "NA"
+                    ),
+                    "vol_accuracy_percent": (
+                        f"{vol_accuracy_percent:.6f}"
+                        if vol_accuracy_percent is not None else "NA"
                     ),
                     "prop_delay_ps": (
                         f"{prop_delay_ps:.6g}"
@@ -318,6 +395,10 @@ fieldnames = [
     "selected_input",
     "output_high_V",
     "output_low_V",
+    "voh_error_V",
+    "vol_error_V",
+    "voh_accuracy_percent",
+    "vol_accuracy_percent",
     "prop_delay_ps",
     "rise_time_ps",
     "fall_time_ps",

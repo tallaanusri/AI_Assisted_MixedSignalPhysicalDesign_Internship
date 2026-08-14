@@ -1,0 +1,19 @@
+Task 5 OpenLane Integration Verification
+Repository: /home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB
+
+PASS: AMUX2_3V GDS exists
+PASS: AMUX2_3V LEF exists
+PASS: AMUX2_3V Liberty exists
+PASS: AMUX2_3V Verilog exists
+PASS: design_mux RTL exists
+PASS: OpenLane configuration exists
+PASS: Macro placement configuration exists
+PASS: LEF referenced by OpenLane configuration
+PASS: Liberty referenced by OpenLane configuration
+PASS: GDS referenced by OpenLane configuration
+PASS: design_mux instantiates AMUX2_3V
+PASS: black-box macro synthesis handling configured
+
+PASS checks : 12
+FAIL checks : 0
+OPENLANE INTEGRATION INPUT VERIFICATION: PASS

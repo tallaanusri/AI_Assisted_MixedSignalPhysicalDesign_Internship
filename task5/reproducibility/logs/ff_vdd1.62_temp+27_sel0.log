@@ -1,0 +1,37 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * ============================================================
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                       1.62
+vss                                          0
+select                                       0
+i0                                           0
+i1                                           0
+out                                4.20889e-09
+vi1#branch                         2.15721e-12
+vi0#branch                         5.39939e-12
+vsel#branch                                  0
+vss#branch                         4.35795e-12
+vdd#branch                        -1.19146e-11
+
+ Reference value :  0.00000e+00 Reference value :  9.43280e-10 Reference value :  2.92650e-09 Reference value :  5.05550e-09 Reference value :  7.16350e-09 Reference value :  9.24750e-09 Reference value :  1.07485e-08 Reference value :  1.26595e-08 Reference value :  1.47405e-08 Reference value :  1.68385e-08 Reference value :  1.88885e-08
+No. of Data Rows : 20032
+voh                 =  1.620283e+00 at=  6.020700e-09
+vol                 =  4.208895e-09 at=  1.000000e-09
+tpd_rise            =  6.260016e-11 targ=  1.072600e-09 trig=  1.010000e-09
+tpd_fall            =  6.125197e-11 targ=  6.091252e-09 trig=  6.030000e-09
+rise_time           =  1.902854e-10 targ=  1.208692e-09 trig=  1.018407e-09
+"/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task5/reproducibility/results/ff_vdd1.62_temp+27_sel0.raw": No such file or directory
+fall_time           =  1.274281e-10 targ=  6.168088e-09 trig=  6.040660e-09
+ngspice-45.2 done

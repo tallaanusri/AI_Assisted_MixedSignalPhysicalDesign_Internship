@@ -98,3 +98,32 @@ The authoritative implementation is:
 `task4/iteration_3/`
 
 Task 5 does not modify the verified physical implementation. It packages the verification evidence and extends the characterization and reproducibility flow.
+
+## OpenLane Reproducibility Note
+
+The AMUX2_3V macro views required for OpenLane integration are preserved
+under `openlane/`:
+
+- `AMUX2_3V.gds`
+- `AMUX2_3V.lef`
+- `AMUX2_3V.lib`
+- `AMUX2_3V.v`
+
+The corresponding Task 4 integration configuration is preserved under:
+
+`task4/iteration_3/step8_rtl_to_gds/`
+
+including:
+
+- `config.tcl`
+- `macro.cfg`
+- `src/design_mux.v`
+- `src/AMUX2_3V.v`
+- `macro/AMUX2_3V.gds`
+- `macro/AMUX2_3V.lef`
+- `macro/AMUX2_3V.lib`
+
+The repository therefore preserves the inputs and configuration required
+to reproduce the OpenLane integration. No new Task 5 OpenLane run result is
+claimed here because the historical OpenLane container run artifacts are
+not preserved in the Git repository.
