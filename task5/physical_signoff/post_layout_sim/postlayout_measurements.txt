@@ -1,0 +1,19 @@
+Task 4 - AMUX2_3V Post-Layout Simulation Results
+================================================
+
+Technology : SKY130A
+Corner     : TT
+Temperature: 27 C
+VDD        : 1.8 V
+Load       : 20 fF
+
+Select = 0 : I0 -> OUT
+Rise delay : 74.849 ps
+Fall delay : 71.334 ps
+
+Select = 1 : I1 -> OUT
+Rise delay : 77.281 ps
+Fall delay : 69.168 ps
+
+LVS : PASS
+DRC : 0 violations

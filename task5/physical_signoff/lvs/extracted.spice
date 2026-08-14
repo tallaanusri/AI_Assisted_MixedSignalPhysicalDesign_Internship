@@ -1,0 +1,10 @@
+* NGSPICE file created from AMUX2_3V_magic83_DRC0_select_fixed.ext - technology: sky130A
+
+.subckt AMUX2_3V I0 I1 select out VDD VSS
+X0 out a_188_220# I0 VSS sky130_fd_pr__nfet_01v8 ad=0.25 pd=2 as=0.25 ps=2 w=0.5 l=0.15
+X1 out select I0 VDD sky130_fd_pr__pfet_01v8 ad=0.5 pd=3 as=0.5 ps=3 w=1 l=0.15
+X2 out select I1 VSS sky130_fd_pr__nfet_01v8 ad=0.25 pd=2 as=0.25 ps=2 w=0.5 l=0.15
+X3 out a_188_220# I1 VDD sky130_fd_pr__pfet_01v8 ad=0.5 pd=3 as=0.5 ps=3 w=1 l=0.15
+X4 a_188_220# select VSS VSS sky130_fd_pr__nfet_01v8 ad=0.25 pd=2 as=0.25 ps=2 w=0.5 l=0.15
+X5 a_188_220# select VDD VDD sky130_fd_pr__pfet_01v8 ad=0.5 pd=3 as=0.5 ps=3 w=1 l=0.15
+.ends

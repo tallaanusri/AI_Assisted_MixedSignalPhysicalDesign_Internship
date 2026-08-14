@@ -1,0 +1,31 @@
+
+Magic 8.3 revision 413 - Compiled on Wed Jul 12 10:04:40 UTC 2023.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Input style sky130(): scaleFactor=2, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    ubm
+Processing system .magicrc file
+Using technology "sky130A", version 1.0.588-52-gf6eeac7
+Warning: cell <AMUX2_3V_magic83_compatible> from file AMUX2_3V_magic83_compatible.mag is not writeable
+Cell AMUX2_3V_magic83_compatible read from current working directory
+Total DRC errors found: 0
+No option given in ":drc" command.
+l isn't a valid drc option.
+DRC commands have the form ":drc [list|listall] option", where option is one of:
+    catchup                run checker and wait for it to complete
+    check                  recheck area under box in all cells
+    count [total]          count error tiles in each cell under box
+    euclidean on|off	enable/disable Euclidean geometry checking
+    find [nth]     	locate next (or nth) error in the layout
+    help                   print this help information
+    ignore	[<text>|none]   do not report on rules with this text
+    off                    turn off background checker
+    on                     reenable background checker
+    status			report if the drc checker is on or off
+    style			set the DRC style
+    printrules [file]      print out design rules in file or on tty
+    rulestats              print out stats about design rule database
+    statistics             print out statistics gathered by checker
+    why                    print out reasons for errors under box
