@@ -1,0 +1,68 @@
+=============================================================
+TASK 5 - AMUX2_3V PVT CHARACTERIZATION SUMMARY
+=============================================================
+
+DUT:
+AMUX2_3V double-height 2:1 analog MUX
+
+PVT CHARACTERIZATION MATRIX
+---------------------------
+Process corners : TT, SS, FF
+Supply voltages : 1.62 V, 1.80 V, 1.98 V
+Temperatures    : -40 C, 27 C, 125 C
+Select states   : 0, 1
+
+Total simulations:
+54
+
+FUNCTIONAL VERIFICATION
+-----------------------
+Functionality PASS : 54 / 54
+Simulation status  : 54 / 54
+
+Timing measurements:
+Propagation delay : 54 / 54
+Rise time         : 54 / 54
+Fall time         : 54 / 54
+
+
+WORST-CASE RESULTS
+------------------
+
+Minimum VOH:
+    1.61962 V
+    FF, 1.62 V, 125 C, Select=1, I1
+
+Maximum VOL:
+    6.6928e-08 V
+    TT, 1.98 V, 125 C, Select=0, I0
+
+Worst propagation delay:
+    170.7 ps
+    SS, 1.62 V, -40 C, Select=1, I1
+
+Worst rise time:
+    439.538 ps
+    SS, 1.62 V, -40 C, Select=1, I1
+
+Worst fall time:
+    298.93 ps
+    SS, 1.62 V, 125 C, Select=0, I0
+
+
+CONCLUSION
+----------
+
+The AMUX2_3V post-layout extracted circuit was characterized
+across all 54 PVT operating conditions.
+
+All 54 simulations passed functional verification.
+
+All propagation-delay, rise-time, and fall-time measurements
+were successfully obtained.
+
+The MUX maintained correct functional behavior across the
+characterized process, voltage, and temperature space.
+
+Overall Task 5 PVT characterization result: PASS.
+=============================================================

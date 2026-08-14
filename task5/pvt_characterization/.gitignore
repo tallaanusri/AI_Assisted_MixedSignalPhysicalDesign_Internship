@@ -1,0 +1,9 @@
+# Generated ngspice waveform files
+results/*.raw
+
+# Python cache
+scripts/__pycache__/
+*.pyc
+
+# Temporary backup files
+*.bak

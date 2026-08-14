@@ -1,0 +1,55 @@
+* ============================================================
+* Task 5 - Automated PVT Characterization
+* Corner      : tt
+* VDD         : 1.62 V
+* Temperature : -40 C
+* Select      : 0
+* Selected    : I0
+* ============================================================
+
+.include "/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task5/pvt_characterization/testbenches/AMUX2_3V_extracted.spice"
+
+.param VDDVAL=1.620000
+.param TEMPVAL=-40
+
+VDD VDD 0 {VDDVAL}
+VSS VSS 0 0
+
+VSEL select 0 0
+VI0 I0 0 PULSE(0 {VDDVAL} 1n 20p 20p 5n 10n)
+VI1 I1 0 0
+
+CLOAD out 0 20f
+
+.lib "/home/anusri/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/ngspice/sky130.lib.spice" tt
+.temp {TEMPVAL}
+
+XMUX I0 I1 select out VDD VSS AMUX2_3V_magic83_DRC0_select_fixed
+
+.tran 1p 20n
+
+.control
+set noaskquit
+run
+
+* Output levels
+meas tran voh MAX v(out) FROM=6n TO=10n
+meas tran vol MIN v(out) FROM=1n TO=5n
+
+* Propagation delay: 50% input to 50% output
+meas tran tpd_rise TRIG v(i0) VAL=0.810000 RISE=1 TARG v(out) VAL=0.810000 RISE=1
+meas tran tpd_fall TRIG v(i0) VAL=0.810000 FALL=1 TARG v(out) VAL=0.810000 FALL=1
+
+* 10%-90% rise time
+meas tran rise_time TRIG v(out) VAL=0.162000 RISE=1 TARG v(out) VAL=1.458000 RISE=1
+
+* 90%-10% fall time
+meas tran fall_time TRIG v(out) VAL=1.458000 FALL=1 TARG v(out) VAL=0.162000 FALL=1
+
+* Save waveform
+write "/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task5/pvt_characterization/results/tt_vdd1.62_temp-40_sel0.raw" all
+
+quit
+.endc
+
+.end

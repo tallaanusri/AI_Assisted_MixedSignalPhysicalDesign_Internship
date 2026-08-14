@@ -1,0 +1,37 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * ============================================================
+
+Doing analysis at TEMP = 125.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vdd                                       1.62
+vss                                          0
+select                                    1.62
+i0                                           0
+i1                                           0
+out                                1.19998e-07
+vi1#branch                         4.99378e-11
+vi0#branch                          1.6811e-11
+vsel#branch                                  0
+vss#branch                         7.19034e-10
+vdd#branch                        -7.85783e-10
+
+ Reference value :  0.00000e+00 Reference value :  1.60000e-13 Reference value :  1.17250e-09 Reference value :  2.74550e-09 Reference value :  4.59350e-09 Reference value :  6.06850e-09 Reference value :  7.52050e-09 Reference value :  8.96950e-09 Reference value :  1.04965e-08 Reference value :  1.19465e-08 Reference value :  1.34225e-08 Reference value :  1.47395e-08 Reference value :  1.61205e-08 Reference value :  1.75395e-08 Reference value :  1.85935e-08 Reference value :  1.97355e-08
+No. of Data Rows : 20032
+voh                 =  1.620219e+00 at=  6.020700e-09
+vol                 =  -1.327377e-04 at=  1.000700e-09
+tpd_rise            =  1.350037e-10 targ=  1.145004e-09 trig=  1.010000e-09
+tpd_fall            =  1.239693e-10 targ=  6.153969e-09 trig=  6.030000e-09
+rise_time           =  3.468430e-10 targ=  1.377866e-09 trig=  1.031023e-09
+"/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task5/pvt_characterization/results/ss_vdd1.62_temp+125_sel1.raw": No such file or directory
+fall_time           =  2.946936e-10 targ=  6.343390e-09 trig=  6.048697e-09
+ngspice-45.2 done
