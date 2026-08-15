@@ -1,0 +1,173 @@
+anusri@AnuSri:~/OpenLane$ cd ~/OpenLane
+
+docker run --rm \
+  -v "$HOME/OpenLane:/openlane" \
+  -v "$HOME/.ciel/ciel/sky130:/build/pdk" \
+  ghcr.io/the-openroad-project/openlane:ff5509f65b17bfa4068d5336495ab1718987ff69 \
+  bash -lc '
+    set -e
+
+    VERSION=0fe599b2afb6708d281543108caf8310912f54af
+    PDK_SRC=/build/pdk/versions/$VERSION/sky130A
+    PDK_ROOT_FIX=/tmp/pdk
+
+    rm -rf "$PDK_ROOT_FIX"
+    mkdir -p "$PDK_ROOT_FIX"
+    ln -s "$PDK_SRC" "$PDK_ROOT_FIX/sky130A"
+
+    export PDK_ROOT="$PDK_ROOT_FIX"
+    export PDK=sky130A
+
+    echo "================================================="
+    echo "TASK 4 REPRODUCIBILITY RUN — RTL -> GDS"
+    echo "================================================="
+    echo "PDK_ROOT=$PDK_ROOT"
+    echo "PDK=$PDK"
+    echo "PDK_VERSION=$VERSION"
+    echo
+
+    cd /openlane
+
+    ./flow.tcl \
+      -design /openlane/designs/task4_iteration3_clean
+  '
+=================================================
+TASK 4 REPRODUCIBILITY RUN — RTL -> GDS
+=================================================
+PDK_ROOT=/tmp/pdk
+PDK=sky130A
+PDK_VERSION=0fe599b2afb6708d281543108caf8310912f54af
+
+OpenLane v1.0.2 (ff5509f65b17bfa4068d5336495ab1718987ff69)
+All rights reserved. (c) 2020-2025 Efabless Corporation and contributors.
+Available under the Apache License, version 2.0. See the LICENSE file for more details.
+
+[INFO]: Using configuration in 'designs/task4_iteration3_clean/config.tcl'...
+[INFO]: PDK Root: /tmp/pdk
+[INFO]: Process Design Kit: sky130A
+[INFO]: Standard Cell Library: sky130_fd_sc_hd
+[INFO]: Optimization Standard Cell Library: sky130_fd_sc_hd
+[WARNING]: DIODE_INSERTION_STRATEGY is now deprecated; use GRT_REPAIR_ANTENNAS, DIODE_ON_PORTS and RUN_HEURISTIC_DIODE_INSERTION instead.
+[INFO]: DIODE_INSERTION_STRATEGY set to 0. Setting GRT_REPAIR_ANTENNAS to 0
+[INFO]: Run Directory: /openlane/designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15
+[INFO]: Saving runtime environment...
+[INFO]: Preparing LEF files for the nom corner...
+[INFO]: Preparing LEF files for the min corner...
+[INFO]: Preparing LEF files for the max corner...
+[INFO]: Running linter (Verilator) (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/synthesis/linter.log)...
+[INFO]: 0 errors found by linter
+[WARNING]: 7 warnings found by linter
+[STEP 1]
+[INFO]: Running Synthesis (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/synthesis/1-synthesis.log)...
+[STEP 2]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/synthesis/2-sta.log)...
+[STEP 3]
+[INFO]: Running Initial Floorplanning (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/floorplan/3-initial_fp.log)...
+[INFO]: Floorplanned with width 188.6 and height 176.8.
+[STEP 4]
+[INFO]: Running IO Placement...
+[STEP 5]
+[INFO]: Performing Manual Macro Placement (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/placement/5-macro_placement.log)...
+[STEP 6]
+[INFO]: Running Tap/Decap Insertion (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/floorplan/6-tap.log)...
+[INFO]: Power planning with power {VDD} and ground {VSS}...
+[STEP 7]
+[INFO]: Generating PDN (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/floorplan/7-pdn.log)...
+[STEP 8]
+[INFO]: Running Global Placement (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/placement/8-global.log)...
+[STEP 9]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/placement/9-gpl_sta.log)...
+[INFO]: Skipping Placement Resizer Design Optimizations.
+[STEP 10]
+[INFO]: Running Detailed Placement (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/placement/10-detailed.log)...
+[STEP 11]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/placement/11-dpl_sta.log)...
+[STEP 12]
+[INFO]: Running Clock Tree Synthesis (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/cts/12-cts.log)...
+[STEP 13]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/cts/13-cts_sta.log)...
+[INFO]: Skipping Placement Resizer Timing Optimizations.
+[INFO]: Skipping Global Routing Resizer Design Optimizations.
+[INFO]: Skipping Global Routing Resizer Timing Optimizations.
+[STEP 14]
+[INFO]: Running Global Routing (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/routing/14-global.log)...
+[STEP 15]
+[INFO]: Writing Verilog (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/routing/14-global_write_netlist.log)...
+[STEP 16]
+[INFO]: Running Single-Corner Static Timing Analysis (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/routing/16-grt_sta.log)...
+[STEP 17]
+[INFO]: Running Fill Insertion (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/routing/17-fill.log)...
+[STEP 18]
+[INFO]: Running Detailed Routing (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/routing/18-detailed.log)...
+[INFO]: No DRC violations after detailed routing.
+[STEP 19]
+[INFO]: Checking Wire Lengths (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/routing/19-wire_lengths.log)...
+[STEP 20]
+[INFO]: Running SPEF Extraction at the min process corner (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/20-parasitics_extraction.min.log)...
+[STEP 21]
+[INFO]: Running Multi-Corner Static Timing Analysis at the min process corner (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/21-rcx_mcsta.min.log)...
+[STEP 22]
+[INFO]: Running SPEF Extraction at the max process corner (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/22-parasitics_extraction.max.log)...
+[STEP 23]
+[INFO]: Running Multi-Corner Static Timing Analysis at the max process corner (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/23-rcx_mcsta.max.log)...
+[STEP 24]
+[INFO]: Running SPEF Extraction at the nom process corner (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/24-parasitics_extraction.nom.log)...
+[STEP 25]
+[INFO]: Running Multi-Corner Static Timing Analysis at the nom process corner (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/25-rcx_mcsta.nom.log)...
+[STEP 26]
+[INFO]: Running Single-Corner Static Timing Analysis at the nom process corner (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/26-rcx_sta.log)...
+[WARNING]: Module AMUX2_3V blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__tapvpwrvgnd_1 blackboxed during sta
+[WARNING]: Module sky130_ef_sc_hd__decap_12 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_1 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_2 blackboxed during sta
+[STEP 27]
+[INFO]: Creating IR Drop Report (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/27-irdrop.log)...
+[WARNING]: VSRC_LOC_FILES is not defined. The IR drop analysis will run, but the values may be inaccurate.
+[STEP 28]
+[INFO]: Running Magic to generate various views...
+[INFO]: Streaming out GDSII with Magic (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/28-gdsii.log)...
+[INFO]: Generating MAGLEF views...
+[INFO]: Generating lef with Magic (/openlane/designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/28-lef.log)...
+[STEP 29]
+[INFO]: Streaming out GDSII with KLayout (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/29-gdsii-klayout.log)...
+[STEP 30]
+[INFO]: Running XOR on the layouts using KLayout (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/30-xor.log)...
+[INFO]: No XOR differences between KLayout and Magic gds.
+[STEP 31]
+[INFO]: Running Magic Spice Export from LEF (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/31-spice.log)...
+[STEP 32]
+[INFO]: Writing Powered Verilog (logs: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/32-write_powered_def.log, designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/32-write_powered_verilog.log)...
+[STEP 33]
+[INFO]: Writing Verilog (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/32-write_powered_verilog.log)...
+[STEP 34]
+[INFO]: Running LVS (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/34-lvs.lef.log)...
+[STEP 35]
+[INFO]: Running Magic DRC (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/35-drc.log)...
+[INFO]: Converting Magic DRC database to various tool-readable formats...
+[INFO]: No DRC violations after GDS streaming out.
+[STEP 36]
+[INFO]: Running OpenROAD Antenna Rule Checker (log: designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/logs/signoff/36-arc.log)...
+[INFO]: Your design contains macros, which is not supported by the current integration of the Circuit Validity Checker. So CVC won't run, however CVC is just a check so it's not critical to your design.
+[INFO]: Saving current set of views in 'designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/results/final'...
+[INFO]: Saving runtime environment...
+[INFO]: Generating final set of reports...
+[INFO]: Created manufacturability report at 'designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/reports/manufacturability.rpt'.
+[INFO]: Created metrics report at 'designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/reports/metrics.csv'.
+[WARNING]: There are max slew violations in the design at the typical corner. Please refer to 'designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/reports/signoff/26-rcx_sta.checks.rpt'.
+[WARNING]: There are max fanout violations in the design at the typical corner. Please refer to 'designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/reports/signoff/26-rcx_sta.checks.rpt'.
+[INFO]: There are no hold violations in the design at the typical corner.
+[INFO]: There are no setup violations in the design at the typical corner.
+[SUCCESS]: Flow complete.
+[INFO]: Note that the following warnings have been generated:
+[WARNING]: 7 warnings found by linter
+[WARNING]: Module AMUX2_3V blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__tapvpwrvgnd_1 blackboxed during sta
+[WARNING]: Module sky130_ef_sc_hd__decap_12 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_1 blackboxed during sta
+[WARNING]: Module sky130_fd_sc_hd__fill_2 blackboxed during sta
+[WARNING]: VSRC_LOC_FILES is not defined. The IR drop analysis will run, but the values may be inaccurate.
+[WARNING]: There are max slew violations in the design at the typical corner. Please refer to 'designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/reports/signoff/26-rcx_sta.checks.rpt'.
+[WARNING]: There are max fanout violations in the design at the typical corner. Please refer to 'designs/task4_iteration3_clean/runs/RUN_2026.08.15_03.07.15/reports/signoff/26-rcx_sta.checks.rpt'.
+
+anusri@AnuSri:~/OpenLane$
