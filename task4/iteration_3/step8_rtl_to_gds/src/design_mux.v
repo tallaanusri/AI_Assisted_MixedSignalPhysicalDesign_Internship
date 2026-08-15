@@ -20,7 +20,9 @@ module design_mux (
     output wire [7:0] prod_id,
     input  wire [3:0] mask_rev_in,
     output wire [3:0] mask_rev,
-    output wire out
+    output wire out,
+    inout wire VDD,
+    inout wire VSS
 );
 
     // Internal signals between the digital controller and analog macro
@@ -32,8 +34,8 @@ module design_mux (
     // Analog Hard Macro
     //----------------------------------------------------------
     AMUX2_3V u_amux (
-        //.VDD   (VDD),
-        //.VSS   (VSS),
+        .VDD    (VDD),
+        .VSS    (VSS),
         .I0     (I0),
         .I1     (I1),
         .out    (out),

@@ -88,6 +88,9 @@ set ::env(DIODE_INSERTION_STRATEGY) 0
 #-------------------------------------------------------------
 # Macro power grid
 #-------------------------------------------------------------
+set ::env(FP_PDN_MACRO_HOOKS) "u_amux VDD VSS VDD VSS"
+set ::env(FP_PDN_CFG) "$::env(DESIGN_DIR)/macro_pdn.tcl"
+set ::env(FP_PDN_VPITCH) "10"
 set ::env(FP_PDN_ENABLE_MACROS_GRID) 1
 
 #-------------------------------------------------------------

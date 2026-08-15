@@ -1,0 +1,44 @@
+Task 4 RTL-to-GDS Reproducibility Signoff
+
+OpenLane:
+  Version: v1.0.2
+  Commit: ff5509f65b17bfa4068d5336495ab1718987ff69
+
+PDK:
+  sky130A
+  Compatible CIEL version:
+  0fe599b2afb6708d281543108caf8310912f54af
+
+Run:
+  RUN_2026.08.15_03.07.15
+
+Results:
+  OpenLane flow: PASS
+  Detailed routing DRC: 0 violations
+  Final Magic DRC: 0 violations
+  LVS: PASS
+  LVS errors: 0
+  LVS result: Circuits match uniquely
+  Setup violations: 0
+  Hold violations: 0
+
+Final integrated macro:
+  AMUX2_3V
+
+Final AMUX instance:
+  u_amux AMUX2_3V
+
+Final outputs:
+  GDS
+  DEF
+  LEF
+  LIB
+  MAG
+  SPEF
+  SDC
+  SDF
+
+Note:
+  The AMUX2_3V transistor-level macro geometry and circuit were not modified
+  during the integrated LVS fix. The fix was applied at the RTL/OpenLane
+  integration level through explicit VDD/VSS exposure and macro PDN hookup.
