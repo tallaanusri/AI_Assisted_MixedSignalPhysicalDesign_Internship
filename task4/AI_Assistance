@@ -1,5 +1,5 @@
 
-# Prompt 1: using chatgpt genereted the following prompt and it was given to the codex.
+# Prompt 1: using chatgpt genereted the following prompt and it was given to the codex to generate the new AMUX Layout.
 
 ```
 We are completing Task 4 – Week 5: AI-assisted design and integration of a new double-height 2:1 analog MUX for the SKY130A flow.
@@ -205,3 +205,878 @@ Final fixed area: 12.0 µm × 6.0 µm = 72.0 µm².
 
 Structural checks passed: native Magic header/sections/end marker, required layers, and exactly six unique ports in order `I0, I1, select, out, VDD, VSS`. Magic is not installed locally, so no DRC/LVS result is claimed.
 ```
+
+
+# Prompt 2 : using chatgpt genereted the following prompt and it was given to the codex to resolve the prombles and to correct the DRC Errors.
+
+```
+You are working on Task 4 analog MUX physical layout in the actual OpenLane container
+objective_booth.
+
+IMPORTANT: Do NOT claim DRC=0 based on a separate/non-GUI invocation if the interactive
+Magic session reports violations. The interactive Magic 8.3.413 result is the source of
+truth for this task.
+
+TARGET:
+  /openlane/task4_lvs/AMUX2_3V_magic83_DRC0_select_fixed.mag
+
+TECH:
+  /root/.ciel/ciel/sky130/versions/f6eeac7dad085ffcc829ccfd721f7b4ce39edcf7/sky130A/libs.tech/magic/sky130A.tech
+
+MAGIC:
+  Magic 8.3 revision 413
+
+BACKUP ALREADY PRESERVED:
+  /openlane/task4_lvs/AMUX2_3V_magic83_DRC0_select_fixed_pre_all_drc_fix.mag
+
+CURRENT INTERACTIVE MAGIC OBSERVATION:
+  drc check
+  drc count total
+  => Total DRC errors found: 168
+
+  drc find / drc why reports:
+
+  1. Metal2 overlap of Via1 < 0.03um in one direction
+     (met2.5 - met2.4)
+
+  2. Metal1 overlap of Via1 < 0.03um in one direction
+     (via.5a - via.4a)
+
+  The reported first violation box is approximately:
+     (2.300, 5.000) to (2.330, 5.030)
+     size = 0.030um x 0.030um
+
+GOAL:
+  Correct ALL actual Magic DRC violations while preserving the circuit topology
+  and functionality.
+
+STRICT REQUIREMENTS:
+
+1. Work on a COPY of the target first.
+   Never destroy the backup.
+
+2. Use Magic 8.3.413 with the exact SKY130A tech file above.
+
+3. Reproduce the DRC count before editing:
+      load AMUX2_3V_magic83_DRC0_select_fixed
+      drc check
+      drc count total
+   Record the actual count.
+
+4. Diagnose the violations using:
+      drc find
+      drc why
+      box
+   and inspect all unique violation locations/types.
+
+5. Fix the geometry according to the SKY130A rules.
+   Do NOT simply disable DRC rules, ignore errors, change the technology file,
+   or modify the schematic/netlist to hide physical errors.
+
+6. For Via1/Metal1/Metal2 violations, make the actual metal/via geometry satisfy
+   the required overlap/coverage rules. Prefer moving/resizing the relevant metal
+   shapes or vias while maintaining connectivity.
+
+7. Preserve the required six external pins and exact pin order:
+      I0 I1 select out VDD VSS
+
+8. Preserve the already-verified select/sel_b functional topology:
+      inverter: sel_b -> select
+      TG0: PMOS gate select, NMOS gate sel_b
+      TG1: PMOS gate sel_b, NMOS gate select
+
+9. Do not introduce any shorts between:
+      select and sel_b
+      I0 and I1
+      I0/I1 and VDD/VSS
+      out and VDD/VSS
+
+10. After every meaningful geometry modification, rerun:
+      drc check
+      drc count total
+
+11. Continue iterating until the INTERACTIVE Magic DRC database itself reports:
+      Total DRC errors found: 0
+
+12. Do not report success unless this exact command produces:
+      Total DRC errors found: 0
+
+13. After reaching DRC=0, run:
+      drc find
+      drc count total
+   and confirm that no DRC errors remain.
+
+14. Then perform extraction:
+      extract all
+      ext2spice lvs
+      ext2spice -o AMUX2_3V_extracted_after_drc_fix.spice
+
+15. Verify the extracted topology still contains:
+      - 3 NFETs
+      - 3 PFETs
+      - distinct internal sel_b net
+      - select as the external select pin
+      - correct TG gate polarity
+      - pin order I0 I1 select out VDD VSS
+
+16. Compare the extracted netlist against the canonical schematic:
+      /openlane/task4_lvs/AMUX2_3V.spice
+
+17. Do NOT modify the schematic merely to force LVS agreement.
+
+18. Preserve a pre-fix backup and create:
+      /openlane/task4_lvs/AMUX2_3V_magic83_DRC0_select_fixed_all_drc_fixed.mag
+
+19. Create a detailed report:
+      /openlane/task4_lvs/AMUX2_3V_all_drc_fix_final_report.txt
+
+The report must include:
+  - initial interactive DRC count
+  - every distinct DRC rule encountered
+  - affected geometry/locations
+  - what physical layout changes were made
+  - final interactive DRC count
+  - Magic version
+  - SKY130A tech file used
+  - extraction result
+  - extracted subcircuit pin order
+  - transistor count
+  - select/sel_b topology verification
+  - SHA-256 checksums of input, backup, and final layout
+
+MOST IMPORTANT:
+Do not trust an isolated headless DRC result if the interactive Magic session gives a
+different result. Reproduce the user's interactive Magic result first and use that
+same Magic DRC database as the authoritative verification.
+
+At the end, print a concise verification block exactly like:
+
+=== FINAL VERIFICATION ===
+Magic: 8.3 revision 413
+Technology: SKY130A
+Initial interactive DRC count: <N>
+Final interactive DRC count: 0
+Final layout: <path>
+Backup: <path>
+Extracted SPICE: <path>
+Report: <path>
+Pin order: I0 I1 select out VDD VSS
+NFET count: 3
+PFET count: 3
+select/sel_b short: NO
+DRC status: PASS
+===========================
+```
+# Output generated by Prompt 2:
+
+```
+Verified the specified target in `objective_booth` with Magic 8.3.413 and the required SKY130A tech file.
+
+Actual fresh-session result:
+
+```text
+Total DRC errors found: 0
+```
+
+No geometry edits were made because the stated GUI count of 168 could not be reproduced; the target and required backup have identical SHA-256 checksums.
+
+Extraction confirms:
+
+- 3 NFETs and 3 PFETs
+- Correct internal `sel_b` topology
+- Correct MUX gate polarity
+- Pin order: `I0 I1 select out VDD VSS`
+
+Created:
+
+- `/openlane/task4_lvs/AMUX2_3V_magic83_DRC0_select_fixed_pre_all_drc_fix.mag`
+- `/openlane/task4_lvs/AMUX2_3V_all_drc_fix_report.txt`
+
+Local report: [AMUX2_3V_all_drc_fix_report.txt](C:/Users/talla/OneDrive/Documents/ChatGPT/internship/step3_magic_layout/results/AMUX2_3V_all_drc_fix_report.txt)
+```
+
+# Prompt 3 : using chatgpt genereted the following prompt and it was given to the codex to correct the LVS Errors.
+
+```
+TASK 4 — FINAL OPENLANE INTEGRATED LVS DEBUG AND FIX
+=====================================================
+
+Repository:
+~/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB
+
+OpenLane installation:
+~/OpenLane
+
+OpenLane version:
+v1.0.2
+Commit/image:
+ghcr.io/the-openroad-project/openlane:ff5509f65b17bfa4068d5336495ab1718987ff69
+
+PDK:
+SKY130A
+
+This is the FINAL DEBUGGING TASK for Task 4.
+
+DO NOT redesign the AMUX2_3V macro.
+DO NOT replace it with the old/placeholder MUX.
+DO NOT modify the verified transistor-level circuit merely to force LVS.
+DO NOT waive LVS errors.
+DO NOT disable LVS.
+DO NOT mark LVS as PASS unless the actual OpenLane LVS comparison passes.
+
+=====================================================
+PROJECT REQUIREMENT
+=====================================================
+
+Task 4 requires:
+
+1. Design a NEW double-height 2:1 analog MUX named AMUX2_3V.
+2. Verify the transistor-level circuit using SKY130 models and ngspice.
+3. Generate a fresh AI-assisted Magic layout.
+4. Obtain Magic DRC = 0 violations.
+5. Extract the layout.
+6. Obtain Netgen LVS match for the macro.
+7. Perform post-layout ngspice simulation.
+8. Generate macro views:
+   - MAG
+   - extracted SPICE
+   - LEF
+   - GDS
+   - LIB
+   - Verilog black-box
+   - DEF where supported
+9. Integrate the macro into the existing design_mux RTL using OpenLane.
+10. Run a CLEAN OpenLane RTL-to-GDS flow.
+11. Final integrated design must pass:
+    - synthesis
+    - placement
+    - routing
+    - DRC
+    - LVS
+12. No LVS or macro violations may be waived.
+
+The current goal is specifically to make the CLEAN OpenLane integrated design pass LVS with zero errors.
+
+=====================================================
+VERIFIED AMUX2_3V MACRO STATE
+=====================================================
+
+The final verified macro is from:
+
+task4/iteration_3/
+
+Important files:
+
+task4/iteration_3/step1_schematic/AMUX2_3V.spice
+
+task4/iteration_3/step3_magic_drc/AMUX2_3V_magic83_DRC0_select_fixed.mag
+
+task4/iteration_3/step3_magic_drc/AMUX2_3V_magic83_DRC.log
+
+task4/iteration_3/step4_extraction/AMUX2_3V_extracted.spice
+
+task4/iteration_3/step5_lvs/lvs_report.txt
+
+task4/iteration_3/step6_post_layout_simulation/postlayout_measurements.txt
+
+task4/iteration_3/step7_macro_views/AMUX2_3V.gds
+
+task4/iteration_3/step7_macro_views/AMUX2_3V.lef
+
+task4/iteration_3/step7_macro_views/AMUX2_3V.lib
+
+task4/iteration_3/step7_macro_views/AMUX2_3V.mag
+
+task4/iteration_3/step7_macro_views/AMUX2_3V.spice
+
+task4/iteration_3/step7_macro_views/AMUX2_3V.v
+
+task4/iteration_3/step7_macro_views/AMUX2_3V_lvs.spice
+
+The macro is:
+
+AMUX2_3V
+
+Area:
+12 um x 6 um = 72 um²
+
+It is a double-height analog 2:1 MUX.
+
+Expected logical pins:
+
+I0
+I1
+select
+out
+VDD
+VSS
+
+The verified LEF contains:
+
+PIN I0
+PIN I1
+PIN select
+PIN out
+PIN VDD
+PIN VSS
+
+The macro-level physical verification already achieved:
+
+Magic DRC:
+0 violations
+
+Macro extraction:
+PASS
+
+Macro Netgen LVS:
+PASS / circuits match uniquely
+
+Post-layout simulation:
+PASS
+
+Therefore, treat the macro physical implementation as VERIFIED unless the OpenLane LVS evidence proves an actual macro-view inconsistency.
+
+=====================================================
+IMPORTANT CURRENT OPENLANE DESIGN
+=====================================================
+
+A CLEAN OpenLane design was created at:
+
+~/OpenLane/designs/task4_iteration3_clean
+
+It was copied from:
+
+task4/iteration_3/step8_rtl_to_gds/
+
+Current contents:
+
+config.tcl
+macro.cfg
+
+macro/AMUX2_3V.gds
+macro/AMUX2_3V.lef
+macro/AMUX2_3V.lib
+
+src/AMUX2_3V.v
+src/design_mux.v
+src/raven_spi.v
+src/spi_slave.v
+
+Macro placement:
+
+u_amux 80 80 N
+
+Macro size:
+
+12.000 x 6.000 um
+
+=====================================================
+CURRENT OPENLANE CONFIGURATION
+=====================================================
+
+config.tcl contains approximately:
+
+set ::env(DESIGN_NAME) "design_mux"
+
+set ::env(VERILOG_FILES) "\
+$::env(DESIGN_DIR)/src/design_mux.v \
+$::env(DESIGN_DIR)/src/raven_spi.v \
+$::env(DESIGN_DIR)/src/spi_slave.v \
+$::env(DESIGN_DIR)/src/AMUX2_3V.v"
+
+set ::env(SYNTH_READ_BLACKBOX_LIB) 1
+
+set ::env(PDK) "sky130A"
+set ::env(STD_CELL_LIBRARY) "sky130_fd_sc_hd"
+
+set ::env(CLOCK_PORT) "SCK"
+set ::env(CLOCK_PERIOD) "10.0"
+
+set ::env(FP_SIZING) "absolute"
+set ::env(DIE_AREA) "0 0 200 200"
+
+set ::env(EXTRA_LEFS) \
+    "$::env(DESIGN_DIR)/macro/AMUX2_3V.lef"
+
+set ::env(EXTRA_LIBS) \
+    "$::env(DESIGN_DIR)/macro/AMUX2_3V.lib"
+
+set ::env(EXTRA_GDS_FILES) \
+    "$::env(DESIGN_DIR)/macro/AMUX2_3V.gds"
+
+set ::env(MACRO_PLACEMENT_CFG) \
+    "$::env(DESIGN_DIR)/macro.cfg"
+
+set ::env(VDD_NETS) "VDD"
+set ::env(GND_NETS) "VSS"
+
+set ::env(VDD_PIN) "VDD"
+set ::env(GND_PIN) "VSS"
+
+set ::env(GLB_RT_MAXLAYER) "met5"
+
+set ::env(PL_MACRO_HALO) "10 10"
+set ::env(PL_MACRO_CHANNEL) "10 10"
+
+set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0
+
+set ::env(DIODE_INSERTION_STRATEGY) 0
+
+set ::env(FP_PDN_ENABLE_MACROS_GRID) 1
+
+set ::env(RUN_SSTA) 0
+
+=====================================================
+CURRENT MACRO BLACK-BOX
+=====================================================
+
+The current AMUX2_3V.v is:
+
+(* blackbox *)
+module AMUX2_3V (
+    input wire I0,
+    input wire I1,
+    input wire select,
+    output wire out
+);
+endmodule
+
+IMPORTANT:
+
+The physical LEF has VDD and VSS pins.
+
+The current RTL black-box does NOT expose VDD/VSS.
+
+Also inspect design_mux.v because the current AMUX instance historically had VDD/VSS connections commented out:
+
+//.VDD (VDD),
+//.VSS (VSS),
+
+This may be related to the integrated LVS failure.
+
+However, DO NOT assume this is the cause without examining the actual LVS report/netlists.
+
+=====================================================
+CLEAN OPENLANE RUN
+=====================================================
+
+The clean run was:
+
+RUN_2026.08.15_02.32.27
+
+Full path:
+
+~/OpenLane/designs/task4_iteration3_clean/runs/RUN_2026.08.15_02.32.27
+
+The flow successfully reached Step 34.
+
+=====================================================
+OPENLANE RESULTS BEFORE LVS FAILURE
+=====================================================
+
+The clean RTL-to-GDS run achieved:
+
+Linter:
+0 errors
+
+Synthesis:
+PASS
+
+Floorplan:
+PASS
+
+Macro placement:
+PASS
+
+PDN:
+PASS
+
+Global placement:
+PASS
+
+Detailed placement:
+PASS
+
+CTS:
+PASS
+
+Global routing:
+PASS
+
+Detailed routing:
+PASS
+
+Most importantly:
+
+No DRC violations after detailed routing.
+
+SPEF extraction:
+PASS
+
+Multi-corner STA:
+PASS
+
+Magic GDS generation:
+PASS
+
+Magic LEF generation:
+PASS
+
+KLayout GDS generation:
+PASS
+
+KLayout/Magic XOR:
+PASS
+
+No XOR differences between KLayout and Magic GDS.
+
+Thus physical routing/GDS generation is working.
+
+The ONLY flow failure is:
+
+STEP 34:
+Running LVS
+
+OpenLane reports:
+
+[ERROR]: There are LVS errors in the design
+
+Report:
+
+~/OpenLane/designs/task4_iteration3_clean/runs/RUN_2026.08.15_02.32.27/reports/signoff/34-design_mux.lvs.rpt
+
+Log:
+
+~/OpenLane/designs/task4_iteration3_clean/runs/RUN_2026.08.15_02.32.27/logs/signoff/34-lvs.lef.log
+
+=====================================================
+YOUR JOB
+=====================================================
+
+Perform a forensic investigation of the Step 34 LVS failure.
+
+FIRST:
+
+Read and analyze:
+
+reports/signoff/34-design_mux.lvs.rpt
+
+logs/signoff/34-lvs.lef.log
+
+Then identify exactly what two netlists OpenLane is comparing.
+
+Find the final layout-derived netlist and final source/schematic-derived netlist used by Step 34.
+
+Compare:
+
+- top-level cell names
+- instance names
+- AMUX2_3V instance
+- pin names
+- pin order
+- I0
+- I1
+- select
+- out
+- VDD
+- VSS
+- power/ground connectivity
+- macro black-box representation
+- standard-cell power pins
+- top-level supply nets
+- physical macro pins
+- logical RTL pins
+- net names
+- device/cell counts
+- unmatched nets
+- unmatched instances
+- shorts
+- opens
+- missing pins
+- extra pins
+
+DO NOT stop after finding the first warning.
+
+Determine the ROOT CAUSE.
+
+=====================================================
+VERY IMPORTANT INVESTIGATION
+=====================================================
+
+Pay particular attention to this potential mismatch:
+
+Physical macro LEF:
+
+I0
+I1
+select
+out
+VDD
+VSS
+
+Current logical black-box:
+
+I0
+I1
+select
+out
+
+Current design_mux instance historically has VDD/VSS commented out.
+
+Determine whether OpenLane's final layout has:
+
+u_amux/VDD
+u_amux/VSS
+
+while the logical netlist has no corresponding macro power pins.
+
+If this is the cause, determine the correct OpenLane-compatible way to represent the macro.
+
+The desired final architecture is:
+
+RTL:
+AMUX2_3V u_amux (...)
+
+Macro LEF:
+I0
+I1
+select
+out
+VDD
+VSS
+
+Macro GDS:
+same physical pins
+
+OpenLane:
+VDD and VSS must be physically and logically consistent.
+
+Do not simply delete VDD/VSS from the physical macro.
+
+Do not alter the transistor-level macro merely to make LVS pass.
+
+=====================================================
+POSSIBLE FIX
+=====================================================
+
+If the root cause is the missing VDD/VSS logical pins, evaluate whether:
+
+1. AMUX2_3V.v should expose VDD and VSS.
+2. design_mux.v should connect u_amux.VDD to VDD.
+3. design_mux.v should connect u_amux.VSS to VSS.
+4. OpenLane black-box handling needs adjustment.
+5. LEF/GDS/lib views need corresponding consistency.
+6. Any generated macro view needs regeneration.
+
+The fix must preserve the verified macro.
+
+If the macro views are already correct, prefer modifying only the integration-level RTL/black-box representation and configuration.
+
+=====================================================
+DO NOT BREAK THESE REQUIREMENTS
+=====================================================
+
+Do NOT:
+
+- replace AMUX2_3V with the old MUX
+- copy the old MUX layout
+- redesign the transistor-level circuit
+- change the verified macro geometry unnecessarily
+- remove physical VDD/VSS pins just to make LVS pass
+- rename I0/I1/select/out arbitrarily
+- swap select behavior
+- modify the schematic only to force LVS
+- disable LVS
+- waive LVS
+- ignore LVS errors
+- claim PASS based only on a report generated manually
+- fabricate a successful OpenLane run
+
+The final proof must come from an actual fresh OpenLane run.
+
+=====================================================
+REQUIRED DEBUGGING METHOD
+=====================================================
+
+Before editing:
+
+1. Save/record the current state.
+2. Do not modify task4/iteration_3 verified source files unless absolutely necessary.
+3. Work primarily in:
+
+~/OpenLane/designs/task4_iteration3_clean
+
+and then propagate the final correct integration changes back into the Git repository if appropriate.
+
+For every change, explain:
+
+- what was wrong
+- why it caused LVS failure
+- what was changed
+- why the change is electrically correct
+- why the macro remains unchanged/verified
+
+=====================================================
+RE-RUN REQUIREMENT
+=====================================================
+
+After applying the minimal correct fix:
+
+Delete only the clean design's previous run directory or create a NEW clean design/run directory.
+
+Do NOT reuse the failed LVS result as proof.
+
+Run the complete:
+
+RTL
+→ synthesis
+→ floorplan
+→ placement
+→ CTS
+→ routing
+→ DRC
+→ GDS
+→ LVS
+
+flow from a clean run.
+
+The final run must reach:
+
+STEP 34 LVS
+
+and produce:
+
+Circuits match uniquely
+
+with zero LVS errors.
+
+=====================================================
+FINAL VERIFICATION REQUIREMENTS
+=====================================================
+
+After the new run completes, verify:
+
+1. OpenLane flow completed successfully.
+2. Detailed routing reports 0 DRC violations.
+3. Final OpenLane LVS passes.
+4. LVS report contains the actual successful comparison.
+5. No LVS waiver was used.
+6. No macro violation was waived.
+7. AMUX2_3V remains the new double-height 12 x 6 um macro.
+8. The macro remains the same verified physical implementation.
+9. The final GDS contains the AMUX2_3V macro.
+10. The final DEF contains the AMUX2_3V instance.
+11. Final LEF/GDS consistency remains intact.
+
+Also inspect final reports for:
+
+- LVS
+- DRC
+- manufacturability
+- metrics
+- final DEF
+- final GDS
+- final Verilog
+
+=====================================================
+DOCUMENTATION REQUIREMENT
+=====================================================
+
+Create/update a debugging record documenting:
+
+TITLE:
+Task 4 OpenLane Integrated LVS Debug
+
+Include:
+
+1. Initial failure:
+   Step 34 LVS failed.
+
+2. Exact LVS error.
+
+3. Root cause.
+
+4. Files inspected.
+
+5. Minimal fix.
+
+6. Why the fix is electrically correct.
+
+7. Confirmation that the AMUX2_3V macro itself was not redesigned.
+
+8. New clean OpenLane run ID.
+
+9. Final DRC result.
+
+10. Final LVS result.
+
+11. Final integrated design result.
+
+Do not write "LVS PASS" until the fresh run actually passes.
+
+=====================================================
+SUCCESS CRITERION
+=====================================================
+
+The task is complete ONLY when the actual OpenLane clean run produces:
+
+- synthesis PASS
+- placement PASS
+- routing PASS
+- DRC = 0 violations
+- LVS = PASS / Circuits match uniquely
+- final GDS generated
+- final DEF generated
+
+The final result must be reproducible from the repository inputs.
+
+Start by inspecting the actual Step 34 LVS report and log.
+
+Do not make changes until the root cause has been identified from the real LVS evidence.
+```
+
+# Output generated by Prompt 3:
+
+```
+Completed the integrated LVS fix with a fresh clean OpenLane run.
+
+- Run: `RUN_2026.08.15_03.40.00_LVS_FIX2`
+- Flow: `[SUCCESS]: Flow complete.`
+- Detailed-routing DRC: 0 violations
+- Post-GDS Magic DRC: 0 violations
+- LVS: `Final result: Circuits match uniquely.`
+- LVS report: `Total errors = 0`
+- Final GDS, DEF, and Verilog generated; final DEF contains `u_amux AMUX2_3V` at `(80000, 80000)`.
+
+Root cause: AMUX2_3V’s physical VDD/VSS rails are on met1, but the integration lacked an explicit macro PDN hookup and the default macro grid only connected met4↔met5. The layout thus extracted isolated macro supply nets.
+
+Fixes applied only to integration:
+
+- Exposed and connected AMUX2_3V VDD/VSS in RTL.
+- Added `FP_PDN_MACRO_HOOKS`.
+- Added design-local `macro_pdn.tcl` to bridge met1 macro rails to met4.
+- Used a 10 µm met4 PDN pitch to cross the macro.
+
+The final extracted instance is:
+
+`Xu_amux SDO u_raven_spi.reset reg_ena out VDD VSS AMUX2_3V`
+
+No macro GDS, LEF, LIB, SPICE, geometry, or transistor-level circuit was changed. No LVS waiver was used.
+
+Updated repository files:
+
+- `/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task4/iteration_3/step8_rtl_to_gds/config.tcl`
+- `/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task4/iteration_3/step8_rtl_to_gds/macro_pdn.tcl`
+- `/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task4/iteration_3/step8_rtl_to_gds/src/AMUX2_3V.v`
+- `/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task4/iteration_3/step8_rtl_to_gds/src/design_mux.v`
+- `/home/anusri/AI_Assisted_MixedSignalPhysicalDesign_Internship_GITHUB/task4/iteration_3/Task4_OpenLane_Integrated_LVS_Debug.md`
+
+The run has pre-existing max-slew and max-fanout warnings, but no setup/hold violations; they do not affect the requested DRC/LVS success.
+
+```
+
+
+
