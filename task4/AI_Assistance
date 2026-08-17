@@ -1,1 +1,194 @@
 
+# Prompt 1: using chatgpt genereted the following prompt and it was given to the codex.
+```
+We are completing Task 4 – Week 5: AI-assisted design and integration of a new double-height 2:1 analog MUX for the SKY130A flow.
+
+You have been given these files:
+
+1. AMUX2_3V.spice
+2. sky130A.tech
+3. sample_AMUX2_3V.mag
+
+The canonical circuit is AMUX2_3V.spice.
+
+The sample .mag is reference material only.
+
+IMPORTANT:
+Generate a completely NEW Magic layout.
+
+Do NOT:
+
+* copy the sample layout
+* modify the sample layout into the final layout
+* copy an old AMUX2_3V layout
+* use task4_old_attempts
+* patch a previous failed layout
+* modify the canonical SPICE netlist
+
+The layout must be generated from the transistor-level circuit topology.
+
+==================================================
+CANONICAL INTERFACE
+===================
+
+The exact interface is:
+
+.subckt AMUX2_3V I0 I1 select out VDD VSS
+
+External pins:
+
+I0
+I1
+select
+out
+VDD
+VSS
+
+Preserve this exact logical pin order.
+
+==================================================
+FUNCTIONAL REQUIREMENT
+======================
+
+The MUX must implement:
+
+select = 0:
+I0 → out
+
+select = 1:
+I1 → out
+
+Do not reverse the selection.
+
+==================================================
+TRANSISTOR TOPOLOGY
+===================
+
+Use the exact devices and connectivity in AMUX2_3V.spice.
+
+The circuit contains:
+
+1. CMOS select inverter:
+   select → sel_b
+
+2. TG0:
+   PMOS: out select I0 VDD
+   NMOS: out sel_b I0 VSS
+
+3. TG1:
+   PMOS: out sel_b I1 VDD
+   NMOS: out select I1 VSS
+
+4. Select inverter:
+   PMOS: sel_b select VDD VDD
+   NMOS: sel_b select VSS VSS
+
+Use SKY130A 1.8-V devices from the supplied circuit.
+
+==================================================
+LAYOUT SIZE
+===========
+
+Target approximately:
+
+12 um × 6 um
+
+The layout must be double-height.
+
+Keep the cell compact.
+
+Measure and report the actual final area.
+
+==================================================
+PHYSICAL REQUIREMENTS
+=====================
+
+Implement:
+
+* PMOS devices in proper n-well
+* NMOS devices in proper substrate/well
+* correct well ties
+* correct substrate connections
+* proper contacts
+* legal routing
+* appropriate metal layers
+* robust VDD rail
+* robust VSS rail
+
+Do not leave wells or substrate floating.
+
+==================================================
+PIN REQUIREMENTS
+================
+
+Create exactly:
+
+I0
+I1
+select
+out
+VDD
+VSS
+
+No duplicate pins.
+
+No missing pins.
+
+Pins must be on legal routing-accessible metal.
+
+Pins must be placed so that OpenLane/OpenROAD can access them.
+
+Avoid inaccessible pins buried inside the macro.
+
+Power pins must be accessible.
+
+==================================================
+ELECTRICAL SAFETY
+=================
+
+The following shorts are strictly forbidden:
+
+VDD ↔ VSS
+VDD ↔ out
+VDD ↔ I0
+VDD ↔ I1
+VDD ↔ select
+
+VSS ↔ out
+VSS ↔ I0
+VSS ↔ I1
+VSS ↔ select
+
+I0 ↔ I1
+I0 ↔ select
+I1 ↔ select
+
+The only intended switching connections are through the transmission gates.
+
+==================================================
+OUTPUT
+======
+
+Create:
+
+step3_magic_layout/generated/AMUX2_3V.mag
+
+Also create:
+
+step3_magic_layout/generated/layout_generation_notes.md
+
+The notes must document:
+
+* fresh-layout methodology
+* dimensions
+* transistor placement
+* well strategy
+* power strategy
+* routing strategy
+* pin placement
+* design decisions
+
+Do not claim DRC or LVS success yet.
+
+Before finishing, inspect the generated Magic file for syntax and structural correctness.
+```
